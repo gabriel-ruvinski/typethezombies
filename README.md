@@ -1,1 +1,2 @@
-# wordsvszombies
+# Words VS Zombies
+O jogo.
