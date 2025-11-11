@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Words vs Zombies</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <div class="tela tela-inicial">
+        <h1>Words vs Zombies</h1>
+        <div class="menu">
+            <button class="botao" id="btnJogar">Jogar</button>
+            <button class="botao" id="btnTreinar">Treinar</button>
+            <button class="botao" id="btnStats">Estatísticas</button>
+            <button class="botao" id="btnConfig">Configurações</button>
+            <div class="auth-container">
+                <button class="auth">Entrar</button>
+                <button class="auth">Registrar-se</button>
+            </div>    
+        </div>
+        <p class="rodape">© 2025 Todos os direitos reservados.</p>
+    </div>
+
+    <div class="tela tela-config" style="display: none;">
+        <h2>Configurações</h2>
+
+        <div class="config-opcao">
+            <label for="musica">Volume da música</label>
+            <input type="range" id="musica" min="0" max="100" value="70">
+        </div>
+
+        <div class="config-opcao">
+            <label for="efeitos">Volume dos efeitos</label>
+            <input type="range" id="efeitos" min="0" max="100" value="80">
+        </div>
+
+        <div class="config-opcao">
+            <label for="dificuldade">Dificuldade</label>
+            <select id="dificuldade">
+                <option value="facil">Fácil</option>
+                <option value="medio" selected>Médio</option>
+                <option value="dificil">Difícil</option>
+            </select>
+        </div>
+
+        <div class="config-opcao">
+            <label for="tema">Tema</label>
+            <select id="tema">
+                <option value="padrao" selected>Padrão (Verde)</option>
+                <option value="roxo">Roxo</option>
+                <option value="vermelho">Vermelho</option>
+            </select>
+        </div>
+
+        <div class="config-botoes">
+            <button id="btnSalvar">Salvar</button>
+            <button id="btnVoltar">Voltar</button>
+        </div>
+    </div>
+
+    <div class="tela tela-jogo" style="display: none;">
+        <div class="game-header">
+            <div class="score">Pontuação: <span id="pontuacao">0</span></div>
+            <div class="lives">Vidas: <span id="vidas">3</span></div>
+            <div class="timer">Tempo: <span id="tempo">60</span>s</div>
+        </div>
+        
+        <div class="game-area" id="gameArea">
+        </div>
+        
+        <div class="input-area">
+            <input type="text" id="inputPalavra" placeholder="Digite a palavra...">
+            <div class="palavra-atual" id="palavraAtual"></div>
+        </div>
+        
+        <button class="botao" id="btnVoltarJogo">Voltar ao Menu</button>
+    </div>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>

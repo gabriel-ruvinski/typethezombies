@@ -1,0 +1,203 @@
+body {
+    font-family: arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+    color: #00ff66;
+}
+
+.tela-inicial {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #00ff66;
+    border-radius: 15px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 255, 100, 0.3);
+    color: #fff;
+    max-width: 400px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.botao {
+    width: 200px;
+    height: 45px;
+    background-color: #00ff66;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.botao:hover {
+    background-color: #00cc55;
+    transform: scale(1.05);
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.auth {
+    width: 90px;
+    height: 28px;
+    background-color: #00ff66;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.8em;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.auth:hover {
+    background-color: #00cc55;
+    transform: scale(1.05);
+}
+
+.tela-config {
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #00ff66;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 0 20px rgba(0, 255, 100, 0.3);
+    color: #fff;
+    max-width: 400px;
+    margin: auto;
+}
+
+.tela-config h2 {
+    text-align: center;
+    color: #00ff66;
+    margin-bottom: 20px;
+}
+
+.config-opcao {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.config-opcao label {
+    font-weight: bold;
+    color: #00ff66;
+}
+
+.config-opcao input[type="range"],
+.config-opcao select {
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #00ff66;
+}
+
+.config-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.config-botoes button {
+    background-color: #00ff66;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.config-botoes button:hover {
+    background-color: #00cc55;
+    transform: scale(1.05);
+}
+
+.tela-jogo {
+    width: 800px;
+    height: 600px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid #00ff66;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: rgba(0, 255, 102, 0.1);
+    border-bottom: 1px solid #00ff66;
+}
+
+.game-area {
+    height: 450px;
+    position: relative;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+}
+
+.input-area {
+    padding: 15px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#inputPalavra {
+    width: 300px;
+    padding: 10px;
+    background-color: #222;
+    color: #00ff66;
+    border: 1px solid #00ff66;
+    border-radius: 5px;
+    font-size: 1.1em;
+}
+
+.palavra-atual {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #00ff66;
+    font-weight: bold;
+}
+
+
+#btnVoltarJogo {
+    margin: 15px auto;
+    display: block;
+}
+
+#inputPalavra:focus {
+    outline: 2px solid #00ff66;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+}
+
+/* Melhorar a aparência dos zumbis */
+.zumbi {
+    position: absolute;
+    color: #00ff66;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ff66;
+    transition: all 0.1s linear;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid #00ff66;
+    border-radius: 5px;
+}
