@@ -1,2 +1,2 @@
-# Words VS Zombies
+# Type the Zombies
 O jogo.
