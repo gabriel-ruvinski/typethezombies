@@ -200,7 +200,6 @@ class WordsVsZombies {
     }
 }
 
-// Inicializar o jogo quando a página carregar
 document.addEventListener('DOMContentLoaded', function() {
     const jogo = new WordsVsZombies();
     
@@ -236,6 +235,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const efeitos = document.getElementById("efeitos").value;
             const dificuldade = document.getElementById("dificuldade").value;
             const tema = document.getElementById("tema").value;
+
+            // Remover o tema anterior
+            document.body.classList.remove("tema-padrao", "tema-roxo", "tema-vermelho");
+
+            // Aplicar o novo tema
+            if (tema === "padrao") {
+                document.body.classList.add("tema-padrao");
+            } else if (tema === "roxo") {
+                document.body.classList.add("tema-roxo");
+            } else if (tema === "vermelho") {
+                document.body.classList.add("tema-vermelho");
+            }
 
             alert(`Configurações salvas!\n\n Música: ${musica}%\n Efeitos: ${efeitos}%\n Dificuldade: ${dificuldade}\n Tema: ${tema}`);
         });
