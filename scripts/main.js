@@ -240,15 +240,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.classList.remove("tema-padrao", "tema-roxo", "tema-vermelho");
 
             // Aplicar o novo tema
-            if (tema === "padrao") {
-                document.body.classList.add("tema-padrao");
-            } else if (tema === "roxo") {
-                document.body.classList.add("tema-roxo");
-            } else if (tema === "vermelho") {
-                document.body.classList.add("tema-vermelho");
+            switch(tema) {
+                case "roxo": document.body.classList.add("tema-roxo"); break;
+                case "vermelho": document.body.classList.add("tema-vermelho"); break;
+                default: document.body.classList.add("tema-padrao"); break;
             }
-
-            alert(`Configurações salvas!\n\n Música: ${musica}%\n Efeitos: ${efeitos}%\n Dificuldade: ${dificuldade}\n Tema: ${tema}`);
         });
     }
 });
