@@ -159,7 +159,7 @@ body {
     color: var(--cor-texto);
     border: 1px solid var(--cor-borda);
 }
-/**/
+
 .config-botoes {
     display: flex;
     justify-content: center;
