@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
             switch(tema) {
                 case "roxo": document.body.classList.add("tema-roxo"); break;
                 case "vermelho": document.body.classList.add("tema-vermelho"); break;
-                default: document.body.classList.add("tema-padrao"); break;
+                default: document.body.classList.add("tema-padrao"); break; //
             }
         });
     }
