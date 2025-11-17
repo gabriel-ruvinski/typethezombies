@@ -201,3 +201,34 @@ body {
     border: 1px solid #00ff66;
     border-radius: 5px;
 }
+
+/* Temas da tela */
+.tema-padrao {
+    background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+    color: #00ff66;
+}
+
+.tema-roxo {
+    background: radial-gradient(circle at center, #2c003e 0%, #00001a 100%);
+    color: #b300ff;
+}
+
+.tema-vermelho {
+    background: radial-gradient(circle at center, #3e0000 0%, #0a0000 100%);
+    color: #ff3333;
+}
+
+/* Ajuste das telas */
+.tema-roxo .tela-inicial,
+.tema-roxo .tela-config,
+.tema-roxo .tela-jogo {
+    border-color: #b300ff;
+    box-shadow: 0 0 20px rgba(179, 0, 255, 0.3);
+}
+
+.tema-vermelho .tela-inicial,
+.tema-vermelho .tela-config,
+.tema-vermelho .tela-jogo {
+    border-color: #ff3333;
+    box-shadow: 0 0 20px rgba(255, 50, 50, 0.3);
+}
