@@ -250,13 +250,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 
-document.getElementById('btnLogin').addEventListener('click', () => {
-    mostrarTela('.tela-login');
-});
-
-document.getElementById('btnRegistro').addEventListener('click', () => {
-    mostrarTela('.tela-registro');
-});
 
 //Referenciando as telas
 const telas = {
@@ -291,4 +284,11 @@ const telas = {
         }
     }
 
+//Botões da tela inicial
+document.getElementById('btnLogin').addEventListener('click', () => {
+    mostrarTela('.tela-login');
+});
 
+document.getElementById('btnRegistro').addEventListener('click', () => {
+    mostrarTela('.tela-registro');
+});
