@@ -284,11 +284,91 @@ const telas = {
         }
     }
 
-//Botões da tela inicial
+//BOTÕES
+
+    //Botões da tela inicial
+document.getElementById('btnJogar').addEventListener('click', () => {
+    mostrarTela('jogo');
+});
+
+document.getElementById('btnStats').addEventListener('click', () => {
+    mostrarTela('estatisticas');
+});
+
+document.getElementById('btnConfig').addEventListener('click', () => {
+    mostrarTela('config');
+});
+
 document.getElementById('btnLogin').addEventListener('click', () => {
-    mostrarTela('.tela-login');
+    mostrarTela('login');
 });
 
 document.getElementById('btnRegistro').addEventListener('click', () => {
+    mostrarTela('registro');
+});
+
+    //Botões para voltar à tela inicial
+document.getElementById('btnVoltar').addEventListener('click', () => {
+    mostrarTela('inicial');
+});
+
+document.getElementById('btnVoltarJogo').addEventListener('click', () => {
+    mostrarTela('inicial');
+});
+
+document.getElementById('btnVoltarLogin').addEventListener('click', () => {
+    mostrarTela('inicial');
+});
+
+document.getElementById('btnVoltarRegistro').addEventListener('click', () => {
+    mostrarTela('inicial');
+});
+
+document.getElementById('btnVoltarStats').addEventListener('click', () => {
+    mostrarTela('inicial');
+});
+
+document.getElementById('btnVoltarHistorico').addEventListener('click', () => {
+    mostrarTela('inicial');
+});
+
+document.getElementById('btnVoltarLigas').addEventListener('click', () => {
+    mostrarTela('inicial');
+});
+
+document.getElementById('btnVoltarRankingGeral').addEventListener('click', () => {
+    mostrarTela('inicial');
+});
+
+document.getElementById('btnVoltarRankingLiga').addEventListener('click', () => {
+    mostrarTela('inicial');
+});
+
+    //Botões da subtelas (conjunto Ligas)
+document.getElementById('btnCriarLiga').addEventListener('click', () => {
+    mostrarTela('criarLiga');
+});
+
+document.getElementById('btnEntrarLiga').addEventListener('click', () => {
+    mostrarTela('entrarLiga');
+});
+
+document.getElementById('btnMinhasLigas').addEventListener('click', () => {
+    mostrarTela('minhasLigas');
+});
+
+document.getElementById('btnVoltarCriarLiga').addEventListener('click', () => {
+    mostrarTela('ligas');
+});
+
+document.getElementById('btnVoltarEntrarLiga').addEventListener('click', () => {
+    mostrarTela('ligas');
+});
+
+document.getElementById('btnVoltarMinhasLigas').addEventListener('click', () => {
+    mostrarTela('ligas');
+});
+document.getElementById('btnRegistro').addEventListener('click', () => {
     mostrarTela('.tela-registro');
 });
+
