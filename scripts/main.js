@@ -249,3 +249,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
 });
+
+document.getElementById('btnLogin').addEventListener('click', () => {
+    mostrarTela('.tela-login');
+});
+
+document.getElementById('btnRegistro').addEventListener('click', () => {
+    mostrarTela('.tela-registro');
+});
+
+//Referenciando as telas
+const telas = {
+    //Telas principais
+    inicial: document.querySelector(".tela-inicial"),
+    config: document.querySelector(".tela-config"),
+    jogo: document.querySelector(".tela-jogo"),
+    login: document.querySelector(".tela-login"),
+    registro: document.querySelector(".tela-registro"),
+    estatisticas: document.querySelector(".tela-estatisticas"),
+    historico: document.querySelector(".tela-historico"),
+    ligas: document.querySelector(".tela-ligas"),
+    rankingGeral: document.querySelector(".tela-ranking-geral"),
+    rankingLiga: document.querySelector(".tela-ranking-liga"),
+
+    //Subtelas (parte das ligas)
+    criarLiga: document.querySelector(".tela-criar-liga"),
+    entrarLiga: document.querySelector(".tela-entrar-liga"),
+    minhasLigas: document.querySelector(".tela-minhas-ligas")
+};
+
+//Função para trocar as telas
+    function mostrarTela(nomeTela) {
+        //esconder todas as telas
+        document.querySelectorAll(".tela").forEach(t => t.style.display = "none");
+
+        //mostrar a tela selecionada
+        if (telas[nomeTela]) {
+            telas[nomeTela].style.display = "block";
+        } else {
+            console.error ("Tela não encontrada: ", nomeTela);
+        }
+    }
+
+
