@@ -220,14 +220,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Quando clicar em "Voltar"
-    if (btnVoltar) {
-        btnVoltar.addEventListener("click", function() {
-            telaConfig.style.display = "none";
-            telaInicial.style.display = "block";
-        });
-    }
-
     // Quando clicar em "Salvar"
     if (btnSalvar) {
         btnSalvar.addEventListener("click", function() {
@@ -251,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//Referenciando as telas
+/* === REFERENCIANDO AS TELAS === */
 const telas = {
     //Telas principais
     inicial: document.querySelector(".tela-inicial"),
@@ -271,7 +263,7 @@ const telas = {
     minhasLigas: document.querySelector(".tela-minhas-ligas")
 };
 
-//Função para trocar as telas
+/* === FUNÇÃO PARA TROCA DE TELAS === */
     function mostrarTela(nomeTela) {
         //esconder todas as telas
         document.querySelectorAll(".tela").forEach(t => t.style.display = "none");
@@ -284,13 +276,9 @@ const telas = {
         }
     }
 
-//BOTÕES
+/* === BOTÕES === */
 
     //Botões da tela inicial
-document.getElementById('btnJogar').addEventListener('click', () => {
-    mostrarTela('jogo');
-});
-
 document.getElementById('btnStats').addEventListener('click', () => {
     mostrarTela('estatisticas');
 });
@@ -344,7 +332,7 @@ document.getElementById('btnVoltarRankingLiga').addEventListener('click', () => 
     mostrarTela('inicial');
 });
 
-    //Botões da subtelas (conjunto Ligas)
+    //Botões das subtelas (conjunto Ligas)
 document.getElementById('btnCriarLiga').addEventListener('click', () => {
     mostrarTela('criarLiga');
 });
@@ -368,7 +356,3 @@ document.getElementById('btnVoltarEntrarLiga').addEventListener('click', () => {
 document.getElementById('btnVoltarMinhasLigas').addEventListener('click', () => {
     mostrarTela('ligas');
 });
-document.getElementById('btnRegistro').addEventListener('click', () => {
-    mostrarTela('.tela-registro');
-});
-
