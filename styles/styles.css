@@ -229,3 +229,140 @@ body {
     border: 1px solid var(--cor-borda);
     border-radius: 5px;
 }
+
+/* Estilizando a tela de login*/
+.tela-login{
+    text-align: center;
+    padding: 20px;
+    max-width: 400px;
+    box-shadow: 0 0 20px var(--cor-sombra);
+    border:2px solid var(--cor-borda);
+    background-color: var(--cor-fundo);
+    border-radius: 15px;
+    
+}
+#formLogin{
+    display: flex;
+    flex-direction: column;   /* coloca tudo em coluna */
+    justify-content: center;  /* centraliza verticalmente o conteúdo */
+    align-items: center;      /* centraliza horizontalmente */
+}
+#loginEmail{
+    border-color: var(--cor-borda);
+    margin: 12px;
+    background-color: var(--cor-fundo);
+    color: white;
+    border-radius: 10px;
+    font-size: 15px;
+}
+#loginSenha{
+   margin: 12px;
+   border-color: var(--cor-borda);
+   background-color: var(--cor-fundo);
+   color: white;
+   border-radius: 10px;
+   font-size: 15px;
+   
+}
+.btnEntrarLogin{
+    background-color: var(--cor-primaria);
+    border: var(--cor-secundaria);
+    border-radius: 15px;
+    font-size: 1.1em;
+    margin: 15px;
+    width: 200px;
+    height: 45px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btnVoltarLogin{
+    background-color: var(--cor-primaria);
+    border-radius: 15px;
+    border: var(--cor-secundaria);
+    font-size: 1.1em;
+    margin: 15px;
+    width: 200px;
+    height: 45px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btnEntrarLogin:hover{
+    transform: scale(1.02);
+    background: var(--cor-secundaria);
+}
+.btnVoltarLogin:hover{
+    transform: scale(1.02);
+    background: var(--cor-secundaria);
+}
+
+/*Estilizando a tela de Registro*/
+.tela-registro{
+    text-align: center;
+    padding: 20px;
+    max-width: 400px;
+    box-shadow: 0 0 20px var(--cor-sombra);
+    border:2px solid var(--cor-borda);
+    background-color: var(--cor-fundo);
+    border-radius: 15px;
+}
+#formRegistro{
+    display: flex;
+    flex-direction: column;   /* coloca tudo em coluna */
+    justify-content: center;  /* centraliza verticalmente O CONTEÚDO */
+    align-items: center;      /* centraliza horizontalmente */
+
+}
+#regUsuario{
+    border-color: var(--cor-borda);
+    margin: 12px;
+    background-color: var(--cor-fundo);
+    color: white;
+    border-radius: 10px;
+    font-size: 15px;
+}
+#regEmail{
+    border-color: var(--cor-borda);
+    margin: 12px;
+    background-color: var(--cor-fundo);
+    color: white;
+    border-radius: 10px;
+    font-size: 15px;
+}
+#regSenha{
+    border-color: var(--cor-borda);
+    margin: 12px;
+    background-color: var(--cor-fundo);
+    color: white;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.btnCriarConta{
+    background-color: var(--cor-primaria);
+    border: var(--cor-secundaria);
+    border-radius: 15px;
+    font-size: 1.1em;
+    margin: 15px;
+    width: 200px;
+    height: 45px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btnVoltarRegistro{
+    background-color: var(--cor-primaria);
+    border: var(--cor-secundaria);
+    border-radius: 15px;
+    font-size: 1.1em;
+    margin: 15px;
+    width: 200px;
+    height: 45px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btnCriarConta:hover{
+    transform: scale(1.05);
+    background: var(--cor-secundaria);
+}
+.btnVoltarRegistro:hover{
+    transform: scale(1.05);
+    background: var(--cor-secundaria);
+}
