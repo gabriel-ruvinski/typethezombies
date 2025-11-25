@@ -1,3 +1,4 @@
+/* === TEMA === */
 :root {
     /* Cores padrão (tema verde) */
     --cor-primaria: #00ff66;
@@ -38,7 +39,7 @@
     --cor-sombra: rgba(255, 50, 50, 0.3);
 }
 
-/* Estilos base */
+/* === ESTILOS BASE === */
 body {
     font-family: arial, sans-serif;
     display: flex;
@@ -50,7 +51,7 @@ body {
     color: var(--cor-texto);
 }
 
-/* Containers */
+/* === CONTAINERS === */
 .tela-inicial,
 .tela-config,
 .tela-jogo {
@@ -81,14 +82,14 @@ body {
     overflow: hidden;
 }
 
-/* Cabeçalhos */
+/* === CABEÇALHOS === */
 .tela-config h2 {
     text-align: center;
     color: var(--cor-texto);
     margin-bottom: 20px;
 }
 
-/* Botões */
+/* === BOTÕES === */
 .botao,
 .auth,
 .config-botoes button {
@@ -124,7 +125,7 @@ body {
     border-radius: 8px;
 }
 
-/* Layout */
+/* === LAYOUT === */
 .menu {
     display: flex;
     flex-direction: column;
@@ -168,7 +169,7 @@ body {
     margin-top: 20px;
 }
 
-/* Jogo */
+/* === JOGO === */
 .game-header {
     display: flex;
     justify-content: space-between;
@@ -216,7 +217,7 @@ body {
     display: block;
 }
 
-/* Zumbis */
+/* === ZUMBIS === */
 .zumbi {
     position: absolute;
     color: var(--cor-texto);
@@ -230,7 +231,7 @@ body {
     border-radius: 5px;
 }
 
-/* Estilizando a tela de login*/
+/* === TELA DE LOGIN === */
 .tela-login{
     text-align: center;
     padding: 20px;
@@ -264,7 +265,7 @@ body {
    font-size: 15px;
    
 }
-.btnEntrarLogin{
+#btnEntrarLogin{
     background-color: var(--cor-primaria);
     border: var(--cor-secundaria);
     border-radius: 15px;
@@ -275,7 +276,7 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
-.btnVoltarLogin{
+#btnVoltarLogin{
     background-color: var(--cor-primaria);
     border-radius: 15px;
     border: var(--cor-secundaria);
@@ -286,16 +287,16 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
-.btnEntrarLogin:hover{
+#btnEntrarLogin:hover{
     transform: scale(1.02);
     background: var(--cor-secundaria);
 }
-.btnVoltarLogin:hover{
+#btnVoltarLogin:hover{
     transform: scale(1.02);
     background: var(--cor-secundaria);
 }
 
-/*Estilizando a tela de Registro*/
+/* === TELA DE REGISTRO === */
 .tela-registro{
     text-align: center;
     padding: 20px;
@@ -336,7 +337,7 @@ body {
     border-radius: 10px;
     font-size: 15px;
 }
-.btnCriarConta{
+#btnCriarConta{
     background-color: var(--cor-primaria);
     border: var(--cor-secundaria);
     border-radius: 15px;
@@ -347,7 +348,7 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
-.btnVoltarRegistro{
+#btnVoltarRegistro{
     background-color: var(--cor-primaria);
     border: var(--cor-secundaria);
     border-radius: 15px;
@@ -358,11 +359,39 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
-.btnCriarConta:hover{
+#btnCriarConta:hover{
     transform: scale(1.05);
     background: var(--cor-secundaria);
 }
-.btnVoltarRegistro:hover{
+#btnVoltarRegistro:hover{
     transform: scale(1.05);
+    background: var(--cor-secundaria);
+}
+
+/* === TELA DE ESTATÍSTICAS === */
+.tela-estatisticas{
+    text-align: center;
+    padding: 20px;
+    max-width: 400px;
+    box-shadow: 0 0 20px var(--cor-sombra);
+    border:2px solid var(--cor-borda);
+    background-color: var(--cor-fundo);
+    border-radius: 15px;
+}
+
+#btnVoltarStats{
+    background-color: var(--cor-primaria);
+    border: var(--cor-secundaria);
+    border-radius: 15px;
+    font-size: 1.1em;
+    margin: 15px;
+    width: 200px;
+    height: 45px;
+    cursor: pointer;
+    transition: 0.3s; 
+}
+
+#btnVoltarStats:hover{
+    transform: scale(1.02);
     background: var(--cor-secundaria);
 }
