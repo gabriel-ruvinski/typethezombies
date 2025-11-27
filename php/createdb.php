@@ -26,62 +26,62 @@
     // Tabela: usuarios
     $sql = "CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(100) NOT NULL,
+        username VARCHAR(100) NOT NULL,
         email VARCHAR(120) NOT NULL UNIQUE,
-        password VARCHAR(150) NOT NULL
+        user_password VARCHAR(150) NOT NULL
     )";
 
     if (mysqli_query($conn, $sql)) {
-        echo "Table 'usuarios' created successfully<br>";
+        echo "Table 'users' created successfully<br>";
     } else {
-        echo "Error creating table usuarios: " . mysqli_error($conn) . "<br>";
+        echo "Error creating table users: " . mysqli_error($conn) . "<br>";
     }
 
     // Tabela: ligas
-    $sql = "CREATE TABLE IF NOT EXISTS ligas (
+    $sql = "CREATE TABLE IF NOT EXISTS leagues (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(100) NOT NULL,
-        palavra_chave VARCHAR(100) NOT NULL,
-        id_criador INT NOT NULL,
-        FOREIGN KEY (id_criador) REFERENCES usuarios(id) ON DELETE CASCADE
+        league_name VARCHAR(100) NOT NULL,
+        league_key VARCHAR(100) NOT NULL,
+        creator_id INT NOT NULL,
+        FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE CASCADE
     )";
 
     if (mysqli_query($conn, $sql)) {
-        echo "Table 'ligas' created successfully<br>";
+        echo "Table 'leagues' created successfully<br>";
     } else {
-        echo "Error creating table ligas: " . mysqli_error($conn) . "<br>";
+        echo "Error creating table leagues: " . mysqli_error($conn) . "<br>";
     }
 
     // Tabela: usuarios_ligas
-    $sql = "CREATE TABLE IF NOT EXISTS usuarios_ligas (
+    $sql = "CREATE TABLE IF NOT EXISTS users_leagues (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        id_usuario INT NOT NULL,
-        id_liga INT NOT NULL,
-        UNIQUE KEY unico_usuario_liga (id_usuario, id_liga),
-        FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,
-        FOREIGN KEY (id_liga) REFERENCES ligas(id) ON DELETE CASCADE
+        user_id INT NOT NULL,
+        league_id INT NOT NULL,
+        UNIQUE KEY unique_user_league (user_id, league_id),
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+        FOREIGN KEY (league_id) REFERENCES leagues(id) ON DELETE CASCADE
     )";
 
     if (mysqli_query($conn, $sql)) {
-        echo "Table 'usuarios_ligas' created successfully<br>";
+        echo "Table 'users_leagues' created successfully<br>";
     } else {
-        echo "Error creating table usuarios_ligas: " . mysqli_error($conn) . "<br>";
+        echo "Error creating table users_leagues: " . mysqli_error($conn) . "<br>";
     }
 
     // Tabela: partidas
-    $sql = "CREATE TABLE IF NOT EXISTS partidas (
+    $sql = "CREATE TABLE IF NOT EXISTS matches (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        id_usuario INT NOT NULL,
-        pontuacao INT NOT NULL DEFAULT 0,
-        data_partida DATETIME DEFAULT CURRENT_TIMESTAMP,
-        duracao_partida INT DEFAULT NULL,
-        FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
+        user_id INT NOT NULL,
+        points INT NOT NULL DEFAULT 0,
+        match_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        match_time INT DEFAULT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     )";
 
     if (mysqli_query($conn, $sql)) {
-        echo "Table 'partidas' created successfully<br>";
+        echo "Table 'matches' created successfully<br>";
     } else {
-        echo "Error creating table partidas: " . mysqli_error($conn) . "<br>";
+        echo "Error creating table matches: " . mysqli_error($conn) . "<br>";
     }
 
     mysqli_close($conn);
