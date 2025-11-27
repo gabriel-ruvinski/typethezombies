@@ -284,7 +284,6 @@ document.getElementById('btnStats').addEventListener('click', () => {
 });
 
 
-
 document.getElementById('btnConfig').addEventListener('click', () => {
     mostrarTela('config');
 });
@@ -357,4 +356,14 @@ document.getElementById('btnVoltarEntrarLiga').addEventListener('click', () => {
 
 document.getElementById('btnVoltarMinhasLigas').addEventListener('click', () => {
     mostrarTela('ligas');
+});
+
+// DEBUG - verificar se os botões estão sendo capturados
+document.addEventListener('click', function(e) {
+    console.log('Clique detectado:', e.target.id, e.target);
+    
+    if (e.target.id.includes('btnVoltar')) {
+        console.log('Botão voltar encontrado!');
+        mostrarTela('inicial');
+    }
 });

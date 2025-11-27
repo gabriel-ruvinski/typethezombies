@@ -395,3 +395,7 @@ body {
     transform: scale(1.02);
     background: var(--cor-secundaria);
 }
+
+.form-inline {
+    display: inline;
+}

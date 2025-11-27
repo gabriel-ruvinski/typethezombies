@@ -1,6 +1,5 @@
 <?php
     require "php/authenticate.php";
-    $login = false;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -16,19 +15,14 @@
             <h1>Type the Zombies</h1>
             <div class="menu">
                 <button class="botao" id="btnJogar">Jogar</button>
-    <div class="tela tela-inicial">
-        <h1>Type the Zombies</h1>
-        <div class="menu">
-            <button class="botao" id="btnJogar">Jogar</button>
-            <button class="botao" id="btnStats">Estatísticas</button>
-            <button class="botao" id="btnConfig">Configurações</button>
-            <div class="auth-container">
-                <button class="auth" id="btnLogin">Entrar</button>
-                <button class="auth" id="btnRegistro">Registrar-se</button>
-            </div>    
-        </div>
+                <button class="botao" id="btnStats">Estatísticas</button>
+                <button class="botao" id="btnConfig">Configurações</button>
+                <form action="php/logout.php" method="post" class="form-inline">
+                    <button type="submit" class="botao">Logout</button>
+                </form>
+            </div>
         <p class="rodape">© 2025 Todos os direitos reservados.</p>
-    </div>
+        </div>
 
     <?php else: ?>
     <div class="tela tela-auth">
