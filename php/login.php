@@ -14,7 +14,7 @@ if (!$login && $_SERVER["REQUEST_METHOD"] == "POST") {
     $password = mysqli_real_escape_string($conn,$_POST["password"]);
     $password = md5($password);
 
-    $sql = "SELECT id,name,email,password FROM users
+    $sql = "SELECT id,username,email,user_password FROM users
             WHERE email = '$email';";
 
     $result = mysqli_query($conn, $sql);
