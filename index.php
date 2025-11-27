@@ -11,7 +11,6 @@
         <h1>Type the Zombies</h1>
         <div class="menu">
             <button class="botao" id="btnJogar">Jogar</button>
-            <button class="botao" id="btnTreinar">Treinar</button>
             <button class="botao" id="btnStats">Estatísticas</button>
             <button class="botao" id="btnConfig">Configurações</button>
             <div class="auth-container">
