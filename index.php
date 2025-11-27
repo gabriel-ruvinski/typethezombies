@@ -1,3 +1,7 @@
+<?php
+    require "php/authenticate.php";
+    $login = false;
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,10 +11,11 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <div class="tela tela-inicial">
-        <h1>Type the Zombies</h1>
-        <div class="menu">
-            <button class="botao" id="btnJogar">Jogar</button>
+    <?php if ($login): ?>
+        <div class="tela tela-inicial">
+            <h1>Type the Zombies</h1>
+            <div class="menu">
+                <button class="botao" id="btnJogar">Jogar</button>
             <button class="botao" id="btnTreinar">Treinar</button>
             <button class="botao" id="btnStats">Estatísticas</button>
             <button class="botao" id="btnConfig">Configurações</button>
@@ -22,6 +27,20 @@
         <p class="rodape">© 2025 Todos os direitos reservados.</p>
     </div>
 
+    <?php else: ?>
+    <div class="tela tela-auth">
+    <p>Escolha uma das opções:</p>
+    <ul>
+        <?php if ($login): ?>
+        <li><a href="logout.php">Logout</a></li>
+        <?php else: ?>
+        <li><a href="php/login.php">Login</a></li>
+        <li><a href="php/register.php">Registrar-se</a></li>
+        <?php endif; ?>
+    </ul>
+    </div>
+    <?php endif; ?>
+    
     <div class="tela tela-config" style="display: none;">
         <h2>Configurações</h2>
 

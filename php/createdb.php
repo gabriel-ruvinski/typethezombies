@@ -24,11 +24,11 @@
     }
 
     // Tabela: usuarios
-    $sql = "CREATE TABLE IF NOT EXISTS usuarios (
+    $sql = "CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        nome VARCHAR(100) NOT NULL,
+        name VARCHAR(100) NOT NULL,
         email VARCHAR(120) NOT NULL UNIQUE,
-        senha VARCHAR(150) NOT NULL
+        password VARCHAR(150) NOT NULL
     )";
 
     if (mysqli_query($conn, $sql)) {
@@ -40,7 +40,7 @@
     // Tabela: ligas
     $sql = "CREATE TABLE IF NOT EXISTS ligas (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        nome VARCHAR(100) NOT NULL,
+        name VARCHAR(100) NOT NULL,
         palavra_chave VARCHAR(100) NOT NULL,
         id_criador INT NOT NULL,
         FOREIGN KEY (id_criador) REFERENCES usuarios(id) ON DELETE CASCADE

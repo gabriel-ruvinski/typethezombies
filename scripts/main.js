@@ -283,6 +283,8 @@ document.getElementById('btnStats').addEventListener('click', () => {
     mostrarTela('estatisticas');
 });
 
+
+
 document.getElementById('btnConfig').addEventListener('click', () => {
     mostrarTela('config');
 });
