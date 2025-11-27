@@ -11,19 +11,15 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-<<<<<<< HEAD
     <?php if ($login): ?>
         <div class="tela tela-inicial">
             <h1>Type the Zombies</h1>
             <div class="menu">
                 <button class="botao" id="btnJogar">Jogar</button>
-            <button class="botao" id="btnTreinar">Treinar</button>
-=======
     <div class="tela tela-inicial">
         <h1>Type the Zombies</h1>
         <div class="menu">
             <button class="botao" id="btnJogar">Jogar</button>
->>>>>>> 040b832db2b157164a65e4d469a7e9bcfe8a78f1
             <button class="botao" id="btnStats">Estatísticas</button>
             <button class="botao" id="btnConfig">Configurações</button>
             <div class="auth-container">
