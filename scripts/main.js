@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Botão Salvar das configurações (específico)
+    // Botão Salvar das configurações
     const btnSalvar = document.getElementById("btnSalvar");
 
     if (btnSalvar) {
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-/* === REFERENCIANDO AS TELAS === */
+/* REFERENCIANDO AS TELAS */
 const telas = {
     inicial: document.querySelector(".tela-inicial"),
     config: document.querySelector(".tela-config"),
@@ -36,7 +36,7 @@ const telas = {
     minhasLigas: document.querySelector(".tela-minhas-ligas")
 };
 
-/* === FUNÇÃO PARA TROCA DE TELAS === */
+/* FUNÇÃO PARA TROCA DE TELAS */
 function mostrarTela(nomeTela) {
     document.querySelectorAll(".tela").forEach(t => t.style.display = "none");
     if (telas[nomeTela]) {
@@ -46,7 +46,7 @@ function mostrarTela(nomeTela) {
     }
 }
 
-/* === SISTEMA DE NAVEGAÇÃO (EVENT DELEGATION) === */
+/* SISTEMA DE NAVEGAÇÃO */
 document.addEventListener('click', function(e) {
     const botao = e.target;
     
@@ -57,17 +57,17 @@ document.addEventListener('click', function(e) {
     if (botao.id === 'btnRegistro') mostrarTela('registro');
     if (botao.id === 'btnJogar') mostrarTela('jogo');
     
-    // 🔹 BOTÕES DE VOLTAR (todos voltam para inicial)
+    // BOTÕES DE VOLTAR (todos voltam para inicial)
     if (botao.id.includes('btnVoltar')) {
         mostrarTela('inicial');
     }
     
-    // 🔹 BOTÕES DAS LIGAS
+    // BOTÕES DAS LIGAS
     if (botao.id === 'btnCriarLiga') mostrarTela('criarLiga');
     if (botao.id === 'btnEntrarLiga') mostrarTela('entrarLiga');
     if (botao.id === 'btnMinhasLigas') mostrarTela('minhasLigas');
     
-    // 🔹 BOTÕES DE VOLTAR DAS SUBTELAS (volta para ligas)
+    // BOTÕES DE VOLTAR DAS SUBTELAS (volta para ligas)
     if (botao.id === 'btnVoltarCriarLiga') mostrarTela('ligas');
     if (botao.id === 'btnVoltarEntrarLiga') mostrarTela('ligas');
     if (botao.id === 'btnVoltarMinhasLigas') mostrarTela('ligas');
