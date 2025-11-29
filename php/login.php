@@ -14,8 +14,7 @@ if (!$login && $_SERVER["REQUEST_METHOD"] == "POST") {
     $password = mysqli_real_escape_string($conn,$_POST["password"]);
     $password = md5($password);
 
-    $sql = "SELECT id,name,email,password FROM users
-            WHERE email = '$email';";
+    $sql = "SELECT id,name,email,password FROM users WHERE email = '$email';";
 
     $result = mysqli_query($conn, $sql);
     if($result){
@@ -23,7 +22,6 @@ if (!$login && $_SERVER["REQUEST_METHOD"] == "POST") {
         $user = mysqli_fetch_assoc($result);
 
         if ($user["password"] == $password) {
-
           $_SESSION["user_id"] = $user["id"];
           $_SESSION["user_name"] = $user["name"];
           $_SESSION["user_email"] = $user["email"];
@@ -52,39 +50,54 @@ if (!$login && $_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Type the Zombies</title>
+  <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
-<h1>Login</h1>
+  <div class="tela tela-login">
+    <h1>Login</h1>
 
-<?php if ($login): ?>
-    <h3>Você já está logado!</h3>
-  </body>
-  </html>
-  <?php exit(); ?>
-<?php endif; ?>
+    <?php if ($login): ?>
+      <div class="mensagem-info">
+        <h3>Você já está logado!</h3>
+        <a href="../index.php" class="botao">Voltar ao Jogo</a>
+      </div>
+    <?php else: ?>
 
-<?php if ($error): ?>
-  <h3 style="color:red;"><?php echo $error_msg; ?></h3>
-<?php endif; ?>
+      <?php if ($error): ?>
+        <div class="mensagem-erro">
+          <h3><?php echo $error_msg; ?></h3>
+        </div>
+      <?php endif; ?>
 
-<form action="login.php" method="post">
-  <label for="email">Email: </label>
-  <input type="text" name="email" value="<?php echo $email; ?>" required><br>
+      <form action="login.php" method="post" class="form-login">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>
+        </div>
 
-  <label for="password">Senha: </label>
-  <input type="password" name="password" value="" required><br>
+        <div class="form-group">
+          <label for="password">Senha:</label>
+          <input type="password" name="password" required>
+        </div>
 
-  <input type="submit" name="submit" value="Entrar">
-</form>
+        <div class="form-botoes">
+          <input type="submit" name="submit" value="Entrar" class="botao">
+          <a href="../index.php" class="botao botao-voltar">Voltar</a>
+        </div>
 
-<ul>
-  <li><a href="../index.php">Voltar</a></li>
-</ul>
-</p>
+        <div class="login-links">
+          <p>Não tem conta? <a href="register.php">Cadastre-se aqui</a></p>
+        </div>
+      </form>
+
+    <?php endif; ?>
+  </div>
 </body>
 </html>

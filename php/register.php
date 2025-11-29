@@ -17,16 +17,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($password == $confirm_password) {
       $password = md5($password);
-
-      $sql = "INSERT INTO users
-              (username, email, user_password) VALUES
-              ('$name', '$email', '$password');";
-
-      if(mysqli_query($conn, $sql)){
-        $success = true;
-      }
-      else {
-        $error_msg = mysqli_error($conn);
+      
+      try {
+        $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
+        
+        if(mysqli_query($conn, $sql)){
+          $success = true;
+        }
+        else {
+          throw new Exception(mysqli_error($conn)); // Converte erro em exceção
+        }
+      } 
+      catch (Exception $e) {
+        $error_message = $e->getMessage();
+        
+        // DETECTA SE É EMAIL DUPLICADO
+        if (strpos($error_message, 'Duplicate entry') !== false && strpos($error_message, 'email') !== false) {
+          $error_msg = "Este email já está cadastrado! Use outro email ou faça login.";
+        } else {
+          $error_msg = "Erro ao criar usuário: " . $error_message;
+        }
         $error = true;
       }
     }
@@ -41,45 +51,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>Registro</title>
+  <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
-<h1>Registre um novo usuário</h1>
+  <div class="tela tela-registro">
+    <h1>Registrar Novo Usuário</h1>
 
-<?php if ($success): ?>
-  <h3 style="color:lightgreen;">Usuário criado com sucesso!</h3>
-  <p>
-    Seguir para <a href="login.php">login</a>.
-  </p>
-<?php endif; ?>
+    <?php if ($success): ?>
+      <div class="mensagem-sucesso">
+        <h3>Usuário criado com sucesso!</h3>
+        <p>Você já pode fazer <a href="login.php" class="botao-link">login</a></p>
+      </div>
+    <?php endif; ?>
 
-<?php if ($error): ?>
-  <h3 style="color:red;"><?php echo $error_msg; ?></h3>
-<?php endif; ?>
+    <?php if ($error): ?>
+      <div class="mensagem-erro">
+        <h3>Erro: <?php echo $error_msg; ?></h3>
+      </div>
+    <?php endif; ?>
 
-<form action="register.php" method="post">
-  <label for="name">Nome: </label>
-  <input type="text" name="name" value="<?php echo $name; ?>" required><br>
+    <form action="register.php" method="post" class="form-registro">
+      <div class="form-group">
+        <label for="name">Nome:</label>
+        <input type="text" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
+      </div>
 
-  <label for="email">Email: </label>
-  <input type="text" name="email" value="<?php echo $email; ?>" required><br>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>
+      </div>
 
-  <label for="password">Senha: </label>
-  <input type="password" name="password" value="" required><br>
+      <div class="form-group">
+        <label for="password">Senha:</label>
+        <input type="password" name="password" required>
+      </div>
 
-  <label for="confirm_password">Confirmação da Senha: </label>
-  <input type="password" name="confirm_password" value="" required><br>
+      <div class="form-group">
+        <label for="confirm_password">Confirmação da Senha:</label>
+        <input type="password" name="confirm_password" required>
+      </div>
 
-  <input type="submit" name="submit" value="Criar usuário">
-</form>
-
-<ul>
-  <li><a href="../index.php">Voltar</a></li>
-</ul>
-</p>
+      <div class="form-botoes">
+        <input type="submit" name="submit" value="Criar Usuário" class="botao">
+        <a href="../index.php" class="botao botao-voltar">Voltar</a>
+      </div>
+    </form>
+  </div>
 </body>
 </html>

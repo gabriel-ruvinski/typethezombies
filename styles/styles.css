@@ -149,6 +149,86 @@ body {
     box-shadow: 0 0 10px var(--cor-sombra);
 }
 
+.form-registro {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: var(--cor-texto);
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  padding: 12px;
+  background-color: var(--cor-input);
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  font-size: 1em;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: 2px solid var(--cor-borda);
+  box-shadow: 0 0 10px var(--cor-sombra);
+}
+
+.form-botoes {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+/* === MENSAGENS === */
+.mensagem-sucesso {
+  background: rgba(0, 255, 102, 0.1);
+  border: 1px solid var(--cor-primaria);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.mensagem-erro {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff3333;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* === BOTÕES ESPECÍFICOS === */
+.botao-link {
+  color: var(--cor-primaria);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.botao-link:hover {
+  text-decoration: underline;
+}
+
+.botao-voltar {
+  background-color: transparent;
+  border: 2px solid var(--cor-primaria);
+  color: var(--cor-texto);
+}
+
+.botao-voltar:hover {
+  background-color: var(--cor-primaria);
+  color: #000;
+}
+
 /* === 4. LAYOUT E ESTRUTURA === */
 
 /* 4.1 Containers específicos */
@@ -327,6 +407,75 @@ body {
 .auth-message p {
     margin: 10px 0;
     font-size: 1.1em;
+}
+
+/* === TELA DE LOGIN === */
+.tela-login {
+  text-align: center;
+  padding: 40px 30px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-login {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+/* === MENSAGENS === */
+.mensagem-info {
+  background: rgba(0, 255, 102, 0.1);
+  border: 1px solid var(--cor-primaria);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.mensagem-info h3 {
+  color: var(--cor-primaria);
+  margin-bottom: 10px;
+}
+
+.mensagem-erro {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff3333;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.mensagem-erro h3 {
+  color: #ff3333;
+  margin: 0;
+}
+
+/* === LINKS DE LOGIN === */
+.login-links {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid var(--cor-borda);
+}
+
+.login-links a {
+  color: var(--cor-primaria);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+}
+
+/* === BOTÕES ESPECÍFICOS === */
+.botao-voltar {
+  background-color: transparent;
+  border: 2px solid var(--cor-primaria);
+  color: var(--cor-texto);
+}
+
+.botao-voltar:hover {
+  background-color: var(--cor-primaria);
+  color: #000;
 }
 
 /* === 6. ELEMENTOS DO JOGO === */
