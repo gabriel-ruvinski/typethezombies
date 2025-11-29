@@ -1,226 +1,7 @@
-class WordsVsZombies {
-    constructor() {
-        this.pontuacao = 0;
-        this.vidas = 3;
-        this.tempo = 60;
-        this.palavras = ['zumbi', 'cerebro', 'infectado', 'apocalipse', 'sobrevivencia', 'epidemia', 'morte', 'noite', 'medo'];
-        this.zumbisAtivos = [];
-        this.jogoAtivo = false;
-        this.timerInterval = null;
-        
-        this.inicializarElementos();
-        this.inicializarEventos();
-    }
-    
-    inicializarElementos() {
-        this.gameArea = document.getElementById('gameArea');
-        this.inputPalavra = document.getElementById('inputPalavra');
-        this.palavraAtual = document.getElementById('palavraAtual');
-        this.pontuacaoElement = document.getElementById('pontuacao');
-        this.vidasElement = document.getElementById('vidas');
-        this.tempoElement = document.getElementById('tempo');
-        this.btnJogar = document.getElementById('btnJogar');
-        this.btnVoltarJogo = document.getElementById('btnVoltarJogo');
-    }
-    
-    inicializarEventos() {
-        this.btnJogar.addEventListener('click', () => this.iniciarJogo());
-        this.btnVoltarJogo.addEventListener('click', () => this.voltarMenu());
-        this.inputPalavra.addEventListener('input', (e) => this.verificarPalavra(e));
-    }
-    
-    iniciarJogo() {
-        // Esconder menu, mostrar jogo
-        document.querySelector('.tela-inicial').style.display = 'none';
-        document.querySelector('.tela-jogo').style.display = 'block';
-        
-        // Resetar valores
-        this.pontuacao = 0;
-        this.vidas = 3;
-        this.tempo = 60;
-        this.jogoAtivo = true;
-        this.zumbisAtivos = [];
-        
-        // Limpar área de jogo
-        this.gameArea.innerHTML = '';
-        
-        this.atualizarUI();
-        this.iniciarTimer();
-        this.gerarZumbi();
-        
-        // Focar no input para começar a digitar
-        this.inputPalavra.focus();
-    }
-    
-    gerarZumbi() {
-        if (!this.jogoAtivo) return;
-        
-        const palavra = this.palavras[Math.floor(Math.random() * this.palavras.length)];
-        const zumbi = document.createElement('div');
-        zumbi.className = 'zumbi';
-        zumbi.textContent = palavra;
-        zumbi.dataset.palavra = palavra;
-        
-        // Posição aleatória no topo (considerando largura do zumbi)
-        const maxLeft = this.gameArea.offsetWidth - 100;
-        zumbi.style.left = Math.random() * maxLeft + 'px';
-        zumbi.style.top = '0px';
-        
-        this.gameArea.appendChild(zumbi);
-        this.zumbisAtivos.push(zumbi);
-        
-        // Mover zumbi para baixo
-        this.moverZumbi(zumbi);
-        
-        // Gerar próximo zumbi após tempo aleatório
-        const proximoZumbi = Math.random() * 2000 + 1000; // 1-3 segundos
-        setTimeout(() => this.gerarZumbi(), proximoZumbi);
-    }
-    
-    moverZumbi(zumbi) {
-        const velocidade = 0.5; // pixels por frame
-        let posicaoTop = 0;
-        
-        const mover = () => {
-            if (!this.jogoAtivo || !zumbi.parentNode) return;
-            
-            posicaoTop += velocidade;
-            zumbi.style.top = posicaoTop + 'px';
-            
-            // Se chegou no final (altura da gameArea - altura do zumbi)
-            if (posicaoTop > this.gameArea.offsetHeight - 30) {
-                this.perderVida();
-                this.removerZumbi(zumbi);
-                return;
-            }
-            
-            requestAnimationFrame(mover);
-        };
-        mover();
-    }
-    
-    verificarPalavra(e) {
-        const texto = e.target.value.toLowerCase().trim();
-        
-        for (let zumbi of this.zumbisAtivos) {
-            if (zumbi.dataset.palavra === texto) {
-                this.eliminarZumbi(zumbi);
-                e.target.value = '';
-                this.palavraAtual.textContent = '';
-                return;
-            }
-        }
-        
-        // Mostrar palavra sendo digitada
-        this.palavraAtual.textContent = texto;
-    }
-    
-    eliminarZumbi(zumbi) {
-        this.pontuacao += 10;
-        this.removerZumbi(zumbi);
-        this.atualizarUI();
-        
-        // Efeito visual de eliminação
-        zumbi.style.color = '#ff0000';
-        zumbi.style.transform = 'scale(1.5)';
-        zumbi.style.opacity = '0.7';
-        
-        setTimeout(() => {
-            if (zumbi.parentNode) {
-                zumbi.remove();
-            }
-        }, 200);
-    }
-    
-    removerZumbi(zumbi) {
-        const index = this.zumbisAtivos.indexOf(zumbi);
-        if (index > -1) {
-            this.zumbisAtivos.splice(index, 1);
-        }
-    }
-    
-    perderVida() {
-        this.vidas--;
-        this.atualizarUI();
-        
-        if (this.vidas <= 0) {
-            this.fimDeJogo();
-        }
-    }
-    
-    atualizarUI() {
-        this.pontuacaoElement.textContent = this.pontuacao;
-        this.vidasElement.textContent = this.vidas;
-        this.tempoElement.textContent = this.tempo;
-    }
-    
-    iniciarTimer() {
-        // Limpar timer anterior se existir
-        if (this.timerInterval) {
-            clearInterval(this.timerInterval);
-        }
-        
-        this.timerInterval = setInterval(() => {
-            this.tempo--;
-            this.tempoElement.textContent = this.tempo;
-            
-            if (this.tempo <= 0) {
-                this.fimDeJogo();
-            }
-        }, 1000);
-    }
-    
-    fimDeJogo() {
-        this.jogoAtivo = false;
-        clearInterval(this.timerInterval);
-        
-        // Limpar zumbis
-        this.zumbisAtivos.forEach(zumbi => {
-            if (zumbi.parentNode) {
-                zumbi.remove();
-            }
-        });
-        this.zumbisAtivos = [];
-        
-        setTimeout(() => {
-            alert(`Fim de Jogo!\nPontuação: ${this.pontuacao}`);
-            this.voltarMenu();
-        }, 500);
-    }
-    
-    voltarMenu() {
-        document.querySelector('.tela-jogo').style.display = 'none';
-        document.querySelector('.tela-inicial').style.display = 'block';
-        this.jogoAtivo = false;
-        clearInterval(this.timerInterval);
-        
-        // Limpar input
-        this.inputPalavra.value = '';
-        this.palavraAtual.textContent = '';
-    }
-}
-
 document.addEventListener('DOMContentLoaded', function() {
-    const jogo = new WordsVsZombies();
-    
-    // Botões principais
-    const btnConfig = document.getElementById("btnConfig");
-    const btnVoltar = document.getElementById("btnVoltar");
+    // Botão Salvar das configurações (específico)
     const btnSalvar = document.getElementById("btnSalvar");
 
-    // Telas
-    const telaInicial = document.querySelector(".tela-inicial");
-    const telaConfig = document.querySelector(".tela-config");
-
-    // Quando clicar em "Configurações"
-    if (btnConfig) {
-        btnConfig.addEventListener("click", function() {
-            telaInicial.style.display = "none";
-            telaConfig.style.display = "block";
-        });
-    }
-
-    // Quando clicar em "Salvar"
     if (btnSalvar) {
         btnSalvar.addEventListener("click", function() {
             const musica = document.getElementById("musica").value;
@@ -228,10 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const dificuldade = document.getElementById("dificuldade").value;
             const tema = document.getElementById("tema").value;
 
-            // Remover o tema anterior
             document.body.classList.remove("tema-padrao", "tema-roxo", "tema-vermelho");
-
-            // Aplicar o novo tema
             switch(tema) {
                 case "roxo": document.body.classList.add("tema-roxo"); break;
                 case "vermelho": document.body.classList.add("tema-vermelho"); break;
@@ -239,13 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
 });
-
 
 /* === REFERENCIANDO AS TELAS === */
 const telas = {
-    //Telas principais
     inicial: document.querySelector(".tela-inicial"),
     config: document.querySelector(".tela-config"),
     jogo: document.querySelector(".tela-jogo"),
@@ -256,114 +31,44 @@ const telas = {
     ligas: document.querySelector(".tela-ligas"),
     rankingGeral: document.querySelector(".tela-ranking-geral"),
     rankingLiga: document.querySelector(".tela-ranking-liga"),
-
-    //Subtelas (parte das ligas)
     criarLiga: document.querySelector(".tela-criar-liga"),
     entrarLiga: document.querySelector(".tela-entrar-liga"),
     minhasLigas: document.querySelector(".tela-minhas-ligas")
 };
 
 /* === FUNÇÃO PARA TROCA DE TELAS === */
-    function mostrarTela(nomeTela) {
-        //esconder todas as telas
-        document.querySelectorAll(".tela").forEach(t => t.style.display = "none");
-
-        //mostrar a tela selecionada
-        if (telas[nomeTela]) {
-            telas[nomeTela].style.display = "block";
-        } else {
-            console.error ("Tela não encontrada: ", nomeTela);
-        }
+function mostrarTela(nomeTela) {
+    document.querySelectorAll(".tela").forEach(t => t.style.display = "none");
+    if (telas[nomeTela]) {
+        telas[nomeTela].style.display = "block";
+    } else {
+        console.error("Tela não encontrada: ", nomeTela);
     }
+}
 
-/* === BOTÕES === */
-
-    //Botões da tela inicial
-document.getElementById('btnStats').addEventListener('click', () => {
-    mostrarTela('estatisticas');
-});
-
-
-document.getElementById('btnConfig').addEventListener('click', () => {
-    mostrarTela('config');
-});
-
-document.getElementById('btnLogin').addEventListener('click', () => {
-    mostrarTela('login');
-});
-
-document.getElementById('btnRegistro').addEventListener('click', () => {
-    mostrarTela('registro');
-});
-
-    //Botões para voltar à tela inicial
-document.getElementById('btnVoltar').addEventListener('click', () => {
-    mostrarTela('inicial');
-});
-
-document.getElementById('btnVoltarJogo').addEventListener('click', () => {
-    mostrarTela('inicial');
-});
-
-document.getElementById('btnVoltarLogin').addEventListener('click', () => {
-    mostrarTela('inicial');
-});
-
-document.getElementById('btnVoltarRegistro').addEventListener('click', () => {
-    mostrarTela('inicial');
-});
-
-document.getElementById('btnVoltarStats').addEventListener('click', () => {
-    mostrarTela('inicial');
-});
-
-document.getElementById('btnVoltarHistorico').addEventListener('click', () => {
-    mostrarTela('inicial');
-});
-
-document.getElementById('btnVoltarLigas').addEventListener('click', () => {
-    mostrarTela('inicial');
-});
-
-document.getElementById('btnVoltarRankingGeral').addEventListener('click', () => {
-    mostrarTela('inicial');
-});
-
-document.getElementById('btnVoltarRankingLiga').addEventListener('click', () => {
-    mostrarTela('inicial');
-});
-
-    //Botões das subtelas (conjunto Ligas)
-document.getElementById('btnCriarLiga').addEventListener('click', () => {
-    mostrarTela('criarLiga');
-});
-
-document.getElementById('btnEntrarLiga').addEventListener('click', () => {
-    mostrarTela('entrarLiga');
-});
-
-document.getElementById('btnMinhasLigas').addEventListener('click', () => {
-    mostrarTela('minhasLigas');
-});
-
-document.getElementById('btnVoltarCriarLiga').addEventListener('click', () => {
-    mostrarTela('ligas');
-});
-
-document.getElementById('btnVoltarEntrarLiga').addEventListener('click', () => {
-    mostrarTela('ligas');
-});
-
-document.getElementById('btnVoltarMinhasLigas').addEventListener('click', () => {
-    mostrarTela('ligas');
-});
-
-// DEBUG - verificar se os botões estão sendo capturados
+/* === SISTEMA DE NAVEGAÇÃO (EVENT DELEGATION) === */
 document.addEventListener('click', function(e) {
-    console.log('Clique detectado:', e.target.id, e.target);
+    const botao = e.target;
     
-    if (e.target.id.includes('btnVoltar')) {
-        console.log('Botão voltar encontrado!');
+    // 🔹 BOTÕES DA TELA INICIAL
+    if (botao.id === 'btnConfig') mostrarTela('config');
+    if (botao.id === 'btnStats') mostrarTela('estatisticas');
+    if (botao.id === 'btnLogin') mostrarTela('login');
+    if (botao.id === 'btnRegistro') mostrarTela('registro');
+    if (botao.id === 'btnJogar') mostrarTela('jogo');
+    
+    // 🔹 BOTÕES DE VOLTAR (todos voltam para inicial)
+    if (botao.id.includes('btnVoltar')) {
         mostrarTela('inicial');
     }
+    
+    // 🔹 BOTÕES DAS LIGAS
+    if (botao.id === 'btnCriarLiga') mostrarTela('criarLiga');
+    if (botao.id === 'btnEntrarLiga') mostrarTela('entrarLiga');
+    if (botao.id === 'btnMinhasLigas') mostrarTela('minhasLigas');
+    
+    // 🔹 BOTÕES DE VOLTAR DAS SUBTELAS (volta para ligas)
+    if (botao.id === 'btnVoltarCriarLiga') mostrarTela('ligas');
+    if (botao.id === 'btnVoltarEntrarLiga') mostrarTela('ligas');
+    if (botao.id === 'btnVoltarMinhasLigas') mostrarTela('ligas');
 });

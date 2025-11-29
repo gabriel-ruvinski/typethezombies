@@ -236,5 +236,6 @@
     </div>
 
     <script src="scripts/main.js"></script>
+    <script src="scripts/game.js"></script>
 </body>
 </html>
