@@ -39,7 +39,7 @@ Cada seção está separada por números, para facilitar a busca
 .tema-roxo {
     --cor-primaria: #b300ff;
     --cor-secundaria: #9900cc;
-    --cor-fundo: radial-gradient(circle at center, #2c003e 0%, #00001a 100%);
+    --cor-fundo: radial-gradient(circle at center, #0a0a01 0%, #000000 100%);
     --cor-texto: #b300ff;
     --cor-borda: #b300ff;
     --cor-sombra: rgba(179, 0, 255, 0.3);
@@ -48,7 +48,7 @@ Cada seção está separada por números, para facilitar a busca
 .tema-vermelho {
     --cor-primaria: #ff3333;
     --cor-secundaria: #cc0000;
-    --cor-fundo: radial-gradient(circle at center, #3e0000 0%, #0a0000 100%);
+    --cor-fundo: radial-gradient(circle at center, #0a0a00 0%, #000000 100%);
     --cor-texto: #ff3333;
     --cor-borda: #ff3333;
     --cor-sombra: rgba(255, 50, 50, 0.3);
@@ -311,6 +311,14 @@ body {
     background-color: var(--cor-container);
     border: 1px solid var(--cor-borda);
     border-radius: 5px;
+}
+
+.zumbi-eliminado {
+    color: #ff0000;
+    transform: scale(1.8) rotate(5deg);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: blur(1px);
 }
 
 /* === 7. UTILITÁRIOS === */
