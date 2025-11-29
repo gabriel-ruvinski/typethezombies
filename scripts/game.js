@@ -1,3 +1,4 @@
+// Todas as funções referentes ao jogo vão dentro dessa função principal
 (function() {
     if (!document.querySelector('.tela-jogo')) return;
     
