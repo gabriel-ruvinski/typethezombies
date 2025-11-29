@@ -26,15 +26,20 @@
 
     <?php else: ?>
     <div class="tela tela-auth">
-    <p>Escolha uma das opções:</p>
-    <ul>
-        <?php if ($login): ?>
-        <li><a href="logout.php">Logout</a></li>
-        <?php else: ?>
-        <li><a href="php/login.php">Login</a></li>
-        <li><a href="php/register.php">Registrar-se</a></li>
-        <?php endif; ?>
-    </ul>
+    <div class="auth-header">
+        <h2>Bem-vindo ao Type The Zombies</h2>
+        <p>Escolha uma opção para continuar:</p>
+    </div>
+        <div class="auth-buttons">
+            <a class="botao auth-btn" href="php/login.php">
+                <span>Entrar</span>
+                <small>Já tenho uma conta</small>
+            </a>
+            <a class="botao auth-btn" href="php/register.php">
+                <span>Cadastrar</span>
+                <small>Criar nova conta</small>
+            </a>
+        </div>
     </div>
     <?php endif; ?>
     
