@@ -1,0 +1,16 @@
+{
+  "facil": [
+    "medo", "morte", "noite", "sangue", "virus", "peste", 
+    "fuga", "arma", "osso", "caos", "rua", "lua", "fim"
+  ],
+  "medio": [
+    "zumbi", "cerebro", "epidemia", "contagio", "infectado",
+    "hospital", "cidade", "escape", "perigo", "ataque",
+    "defesa", "grupo", "lutando", "correr"
+  ],
+  "dificil": [
+    "apocalipse", "sobrevivencia", "resistencia", "quarentena",
+    "pandemia", "isolamento", "catastrofe", "devastacao",
+    "contaminado", "sobrevivente", "protecao"
+  ]
+}
