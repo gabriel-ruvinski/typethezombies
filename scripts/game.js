@@ -8,14 +8,39 @@
             this.pontuacao = 0;
             this.vidas = 3;
             this.tempo = 60;
-            this.palavras = ['zumbi', 'cerebro', 'infectado', 'apocalipse', 'sobrevivencia', 'epidemia', 'morte', 'noite', 'medo'];
+            this.palavras = [];
             this.zumbisAtivos = [];
             this.jogoAtivo = false;
             this.timerInterval = null;
 
+            this.carregarPalavras();
             this.inicializarElementos();
             this.inicializarEventos();
         }
+
+        async carregarPalavras() {
+        try {
+            const response = await fetch('data/words.json');
+            if (!response.ok) {
+                throw new Error('Arquivo não encontrado');
+            }
+            
+            const dados = await response.json();
+            
+            this.palavras = [
+                ...dados.facil,
+                ...dados.medio, 
+                ...dados.dificil
+            ];
+            
+            console.log('Palavras carregadas:', this.palavras.length);
+        } catch (error) {
+            console.error('Erro ao carregar palavras:', error);
+            
+            // Se der erro ao carregar...
+            this.palavras = ['zumbi', 'cerebro', 'medo', 'morte', 'apocalipse'];
+        }
+    }
 
         inicializarElementos() {
             this.gameArea = document.getElementById('gameArea');
