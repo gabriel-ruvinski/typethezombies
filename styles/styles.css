@@ -1,4 +1,20 @@
-/* === TEMA === */
+/*================================*/
+/* STYLES.CSS    TYPE THE ZOMBIES */
+/*================================*/
+
+/* 
+Ao adicionar uma nova função css, por favor, encaixe ela na seção certa do código 
+Cada seção está separada por números, para facilitar a busca
+1. TEMA E VARIÁVEIS
+2. ESTILOS BASE
+3. COMPONENTES REUTILIZÁVEIS
+4. LAYOUT E ESTRUTURA
+5. TELAS ESPECÍFICAS
+6. ELEMENTOS DO JOGO
+7. UTILITÁRIOS
+*/
+
+/* === 1. TEMA E VARIÁVEIS === */
 :root {
     /* Cores padrão (tema verde) */
     --cor-primaria: #00ff66;
@@ -20,7 +36,6 @@
     --cor-sombra: rgba(0, 255, 100, 0.3);
 }
 
-
 .tema-roxo {
     --cor-primaria: #b300ff;
     --cor-secundaria: #9900cc;
@@ -39,7 +54,7 @@
     --cor-sombra: rgba(255, 50, 50, 0.3);
 }
 
-/* === ESTILOS BASE === */
+/* === 2. ESTILOS BASE === */
 body {
     font-family: arial, sans-serif;
     display: flex;
@@ -51,45 +66,9 @@ body {
     color: var(--cor-texto);
 }
 
-/* === CONTAINERS === */
-.tela-inicial,
-.tela-config,
-.tela-jogo {
-    background-color: var(--cor-container);
-    border: 2px solid var(--cor-borda);
-    border-radius: 15px;
-    box-shadow: 0 0 20px var(--cor-sombra);
-    color: var(--cor-texto);
-}
+/* === 3. COMPONENTES REUTILIZÁVEIS === */
 
-.tela-inicial {
-    text-align: center;
-    padding: 20px;
-    max-width: 400px;
-}
-
-.tela-config {
-    text-align: left;
-    padding: 25px;
-    max-width: 400px;
-    margin: auto;
-}
-
-.tela-jogo {
-    width: 800px;
-    height: 600px;
-    position: relative;
-    overflow: hidden;
-}
-
-/* === CABEÇALHOS === */
-.tela-config h2 {
-    text-align: center;
-    color: var(--cor-texto);
-    margin-bottom: 20px;
-}
-
-/* === BOTÕES === */
+/* 3.1. Botões */
 .botao,
 .auth,
 .config-botoes button {
@@ -99,6 +78,7 @@ body {
     color: #000;
     cursor: pointer;
     transition: all 0.2s ease;
+    font-weight: bold;
 }
 
 .botao:hover,
@@ -125,7 +105,74 @@ body {
     border-radius: 8px;
 }
 
-/* === LAYOUT === */
+/* 3.2 Containers base */
+.tela {
+    background-color: var(--cor-container);
+    border: 2px solid var(--cor-borda);
+    border-radius: 15px;
+    box-shadow: 0 0 20px var(--cor-sombra);
+    color: var(--cor-texto);
+}
+
+/* 3.3 Inputs e Formulários */
+.config-opcao input[type="range"],
+.config-opcao select,
+#inputPalavra,
+#loginEmail,
+#loginSenha,
+#regUsuario,
+#regEmail,
+#regSenha {
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: var(--cor-input);
+    color: var(--cor-texto);
+    border: 1px solid var(--cor-borda);
+    font-size: 1em;
+}
+
+.config-opcao input[type="range"],
+.config-opcao select {
+    width: 100%;
+    padding: 5px;
+}
+
+#inputPalavra {
+    width: 300px;
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+#inputPalavra:focus {
+    outline: 2px solid var(--cor-borda);
+    box-shadow: 0 0 10px var(--cor-sombra);
+}
+
+/* === 4. LAYOUT E ESTRUTURA === */
+
+/* 4.1 Containers específicos */
+.tela-inicial {
+    text-align: center;
+    padding: 20px;
+    max-width: 400px;
+}
+
+.tela-config {
+    text-align: left;
+    padding: 25px;
+    max-width: 400px;
+    margin: auto;
+}
+
+.tela-jogo {
+    width: 800px;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 4.2 Grids e Flexbox */
 .menu {
     display: flex;
     flex-direction: column;
@@ -140,6 +187,13 @@ body {
     margin-top: 10px;
 }
 
+.config-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
 .config-opcao {
     margin-bottom: 15px;
     display: flex;
@@ -152,24 +206,67 @@ body {
     color: var(--cor-texto);
 }
 
-.config-opcao input[type="range"],
-.config-opcao select {
-    width: 100%;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: var(--cor-input);
+/* === 5. TELAS ESPECÍFICAS === */
+
+/* 5.1 Tela Inicial */
+.tela-inicial h1 {
     color: var(--cor-texto);
-    border: 1px solid var(--cor-borda);
+    margin-bottom: 20px;
 }
 
-.config-botoes {
+/* 5.2 Tela de Configurações */
+.tela-config h2 {
+    text-align: center;
+    color: var(--cor-texto);
+    margin-bottom: 20px;
+}
+
+/* 5.3 Telas de Autenticação */
+.tela-login,
+.tela-registro,
+.tela-estatisticas {
+    text-align: center;
+    padding: 20px;
+    max-width: 400px;
+}
+
+#formLogin,
+#formRegistro {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+    align-items: center;
 }
 
-/* === JOGO === */
+/* 5.4 Botões específicos de autenticação */
+#btnEntrarLogin,
+#btnVoltarLogin,
+#btnCriarConta,
+#btnVoltarRegistro,
+#btnVoltarStats {
+    background-color: var(--cor-primaria);
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1em;
+    margin: 15px;
+    width: 200px;
+    height: 45px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#btnEntrarLogin:hover,
+#btnVoltarLogin:hover,
+#btnCriarConta:hover,
+#btnVoltarRegistro:hover,
+#btnVoltarStats:hover {
+    transform: scale(1.02);
+    background: var(--cor-secundaria);
+}
+
+/* === 6. ELEMENTOS DO JOGO === */
+
+/* 6.1 Cabeçalho do Jogo */
 .game-header {
     display: flex;
     justify-content: space-between;
@@ -190,21 +287,6 @@ body {
     background-color: var(--cor-container);
 }
 
-#inputPalavra {
-    width: 300px;
-    padding: 10px;
-    background-color: var(--cor-input);
-    color: var(--cor-texto);
-    border: 1px solid var(--cor-borda);
-    border-radius: 5px;
-    font-size: 1.1em;
-}
-
-#inputPalavra:focus {
-    outline: 2px solid var(--cor-borda);
-    box-shadow: 0 0 10px var(--cor-sombra);
-}
-
 .palavra-atual {
     margin-top: 10px;
     font-size: 1.2em;
@@ -217,7 +299,7 @@ body {
     display: block;
 }
 
-/* === ZUMBIS === */
+/* 6.2 Zumbis */
 .zumbi {
     position: absolute;
     color: var(--cor-texto);
@@ -231,171 +313,28 @@ body {
     border-radius: 5px;
 }
 
-/* === TELA DE LOGIN === */
-.tela-login{
-    text-align: center;
-    padding: 20px;
-    max-width: 400px;
-    box-shadow: 0 0 20px var(--cor-sombra);
-    border:2px solid var(--cor-borda);
-    background-color: var(--cor-fundo);
-    border-radius: 15px;
-    
-}
-#formLogin{
-    display: flex;
-    flex-direction: column;   /* coloca tudo em coluna */
-    justify-content: center;  /* centraliza verticalmente o conteúdo */
-    align-items: center;      /* centraliza horizontalmente */
-}
-#loginEmail{
-    border-color: var(--cor-borda);
-    margin: 12px;
-    background-color: var(--cor-fundo);
-    color: white;
-    border-radius: 10px;
-    font-size: 15px;
-}
-#loginSenha{
-   margin: 12px;
-   border-color: var(--cor-borda);
-   background-color: var(--cor-fundo);
-   color: white;
-   border-radius: 10px;
-   font-size: 15px;
-   
-}
-#btnEntrarLogin{
-    background-color: var(--cor-primaria);
-    border: var(--cor-secundaria);
-    border-radius: 15px;
-    font-size: 1.1em;
-    margin: 15px;
-    width: 200px;
-    height: 45px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-#btnVoltarLogin{
-    background-color: var(--cor-primaria);
-    border-radius: 15px;
-    border: var(--cor-secundaria);
-    font-size: 1.1em;
-    margin: 15px;
-    width: 200px;
-    height: 45px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-#btnEntrarLogin:hover{
-    transform: scale(1.02);
-    background: var(--cor-secundaria);
-}
-#btnVoltarLogin:hover{
-    transform: scale(1.02);
-    background: var(--cor-secundaria);
-}
-
-/* === TELA DE REGISTRO === */
-.tela-registro{
-    text-align: center;
-    padding: 20px;
-    max-width: 400px;
-    box-shadow: 0 0 20px var(--cor-sombra);
-    border:2px solid var(--cor-borda);
-    background-color: var(--cor-fundo);
-    border-radius: 15px;
-}
-#formRegistro{
-    display: flex;
-    flex-direction: column;   /* coloca tudo em coluna */
-    justify-content: center;  /* centraliza verticalmente O CONTEÚDO */
-    align-items: center;      /* centraliza horizontalmente */
-
-}
-#regUsuario{
-    border-color: var(--cor-borda);
-    margin: 12px;
-    background-color: var(--cor-fundo);
-    color: white;
-    border-radius: 10px;
-    font-size: 15px;
-}
-#regEmail{
-    border-color: var(--cor-borda);
-    margin: 12px;
-    background-color: var(--cor-fundo);
-    color: white;
-    border-radius: 10px;
-    font-size: 15px;
-}
-#regSenha{
-    border-color: var(--cor-borda);
-    margin: 12px;
-    background-color: var(--cor-fundo);
-    color: white;
-    border-radius: 10px;
-    font-size: 15px;
-}
-#btnCriarConta{
-    background-color: var(--cor-primaria);
-    border: var(--cor-secundaria);
-    border-radius: 15px;
-    font-size: 1.1em;
-    margin: 15px;
-    width: 200px;
-    height: 45px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-#btnVoltarRegistro{
-    background-color: var(--cor-primaria);
-    border: var(--cor-secundaria);
-    border-radius: 15px;
-    font-size: 1.1em;
-    margin: 15px;
-    width: 200px;
-    height: 45px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-#btnCriarConta:hover{
-    transform: scale(1.05);
-    background: var(--cor-secundaria);
-}
-#btnVoltarRegistro:hover{
-    transform: scale(1.05);
-    background: var(--cor-secundaria);
-}
-
-/* === TELA DE ESTATÍSTICAS === */
-.tela-estatisticas{
-    text-align: center;
-    padding: 20px;
-    max-width: 400px;
-    box-shadow: 0 0 20px var(--cor-sombra);
-    border:2px solid var(--cor-borda);
-    background-color: var(--cor-fundo);
-    border-radius: 15px;
-}
-
-#btnVoltarStats{
-    background-color: var(--cor-primaria);
-    border: var(--cor-secundaria);
-    border-radius: 15px;
-    font-size: 1.1em;
-    margin: 15px;
-    width: 200px;
-    height: 45px;
-    cursor: pointer;
-    transition: 0.3s; 
-}
-
-#btnVoltarStats:hover{
-    transform: scale(1.02);
-    background: var(--cor-secundaria);
-}
-
+/* === 7. UTILITÁRIOS === */
 .form-inline {
     display: inline;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-15 {
+    margin-top: 15px;
+}
+
+/* 7.1 Efeitos de hover consistentes */
+.botao:hover, 
+.auth:hover, 
+.config-botoes button:hover,
+#btnEntrarLogin:hover,
+#btnVoltarLogin:hover,
+#btnCriarConta:hover,
+#btnVoltarRegistro:hover,
+#btnVoltarStats:hover {
+    background-color: var(--cor-secundaria);
+    transform: scale(1.02);
 }
