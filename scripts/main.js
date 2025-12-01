@@ -26,7 +26,6 @@ const telas = {
     jogo: document.querySelector(".tela-jogo"),
     login: document.querySelector(".tela-login"),
     registro: document.querySelector(".tela-registro"),
-    estatisticas: document.querySelector(".tela-estatisticas"),
     historico: document.querySelector(".tela-historico"),
     ligas: document.querySelector(".tela-ligas"),
     rankingGeral: document.querySelector(".tela-ranking-geral"),
@@ -52,7 +51,7 @@ document.addEventListener('click', function(e) {
     
     // 🔹 BOTÕES DA TELA INICIAL
     if (botao.id === 'btnConfig') mostrarTela('config');
-    if (botao.id === 'btnStats') mostrarTela('estatisticas');
+    if (botao.id === 'btnHistorico') mostrarTela('historico');
     if (botao.id === 'btnLogin') mostrarTela('login');
     if (botao.id === 'btnRegistro') mostrarTela('registro');
     if (botao.id === 'btnJogar') mostrarTela('jogo');
@@ -65,7 +64,10 @@ document.addEventListener('click', function(e) {
     // BOTÕES DAS LIGAS
     if (botao.id === 'btnCriarLiga') mostrarTela('criarLiga');
     if (botao.id === 'btnEntrarLiga') mostrarTela('entrarLiga');
-    if (botao.id === 'btnMinhasLigas') mostrarTela('minhasLigas');
+    if (botao.id === 'btnMinhasLigas') {
+        mostrarTela('minhas-ligas');
+        carregarMinhasLigas();
+    }
     
     // BOTÕES DE VOLTAR DAS SUBTELAS (volta para ligas)
     if (botao.id === 'btnVoltarCriarLiga') mostrarTela('ligas');
@@ -110,5 +112,46 @@ document.getElementById("btnHistorico").addEventListener("click", function () {
 
 // BOTÃO VOLTAR
 document.getElementById("btnVoltarHistorico").addEventListener("click", function () {
-    trocarTela('inicial');
+    trocarTela('inicial');  
 });
+
+// TELA DE LIGAS
+    //SUBTELA "MINHAS LIGAS"
+    async function carregarMinhasLigas() {
+    const lista = document.getElementById('listaMinhasLigas');
+    lista.innerHTML = '<li>Carregando ligas...</li>';
+
+    try {
+        const response = await fetch('php/get_user_leagues.php');
+        if (!response.ok) throw new Error('Erro ao acessar o servidor');
+
+        const ligas = await response.json();
+
+        if (ligas.length === 0) {
+            lista.innerHTML = '<li>Você ainda não participa de nenhuma liga.</li>';
+            return;
+        }
+
+        lista.innerHTML = '';
+        ligas.forEach(liga => {
+            const li = document.createElement('li');
+            li.textContent = liga.league_name;
+
+            // Botão "Classificações" que podemos implementar depois
+            const btnRanking = document.createElement('button');
+            btnRanking.textContent = 'Classificações';
+            btnRanking.style.marginLeft = '10px';
+            btnRanking.addEventListener('click', () => {
+                // Aqui você pode chamar a função que mostra o ranking da liga
+                alert(`Aqui irá abrir o ranking da liga "${liga.league_name}"`);
+            });
+
+            li.appendChild(btnRanking);
+            lista.appendChild(li);
+        });
+
+    } catch (error) {
+        console.error(error);
+        lista.innerHTML = '<li>Erro ao carregar ligas.</li>';
+    }
+}
