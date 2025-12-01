@@ -65,7 +65,7 @@ document.addEventListener('click', function(e) {
     if (botao.id === 'btnCriarLiga') mostrarTela('criarLiga');
     if (botao.id === 'btnEntrarLiga') mostrarTela('entrarLiga');
     if (botao.id === 'btnMinhasLigas') {
-        mostrarTela('minhas-ligas');
+        mostrarTela('minhasLigas');
         carregarMinhasLigas();
     }
     
@@ -115,7 +115,98 @@ document.getElementById("btnVoltarHistorico").addEventListener("click", function
     trocarTela('inicial');  
 });
 
-// TELA DE LIGAS
+/* TELA DE LIGAS */
+    //SUBTELA "CRIAR LIGA"
+    const formCriarLiga = document.getElementById("formCriarLiga");
+    const ligaMsg = document.createElement('p');
+    ligaMsg.style.color = 'red'; 
+    formCriarLiga.appendChild(ligaMsg); // mensagem abaixo do formulário
+
+    formCriarLiga.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    ligaMsg.textContent = "Carregando...";
+
+    const league_name = document.getElementById("ligaNome").value.trim();
+    const league_key = document.getElementById("ligaSenha").value.trim();
+
+    const formData = new FormData();
+    formData.append("league_name", league_name);
+    formData.append("league_key", league_key);
+
+    try {
+        const response = await fetch("php/create_league.php", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.status === "empty" || data.status === "exists" || data.status === "error") {
+            ligaMsg.style.color = 'red';
+            ligaMsg.textContent = data.message;
+        } else if (data.status === "success") {
+            ligaMsg.style.color = 'green';
+            ligaMsg.textContent = data.message;
+
+            // Atualiza a lista de Minhas Ligas
+            carregarMinhasLigas();
+
+            // Limpa campos
+            formCriarLiga.reset();
+        }
+
+    } catch (error) {
+        ligaMsg.style.color = 'red';
+        ligaMsg.textContent = "Erro ao conectar ao servidor.";
+        console.error(error);
+        }
+    });
+
+    //SUBTELA "ENTRAR EM UMA LIGA"
+    const formEntrarLiga = document.getElementById("formEntrarLiga");
+    const joinMsg = document.createElement('p');
+    joinMsg.style.color = 'red';
+    formEntrarLiga.appendChild(joinMsg);
+
+    formEntrarLiga.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    joinMsg.textContent = "Carregando...";
+
+    const league_id = document.getElementById("ligaID").value.trim();
+    const league_key = document.getElementById("ligaSenhaEntrada").value.trim();
+
+    const formData = new FormData();
+    formData.append("league_id", league_id);
+    formData.append("league_key", league_key);
+
+    try {
+        const response = await fetch("php/join_league.php", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.status === "empty" || data.status === "notfound" || data.status === "error") {
+            joinMsg.style.color = 'red';
+            joinMsg.textContent = data.message;
+        } else if (data.status === "success") {
+            joinMsg.style.color = 'green';
+            joinMsg.textContent = data.message;
+
+            // Atualiza lista de Minhas Ligas
+            carregarMinhasLigas();
+
+            formEntrarLiga.reset();
+        }
+
+    } catch (err) {
+        joinMsg.style.color = 'red';
+        joinMsg.textContent = "Erro ao conectar ao servidor.";
+        console.error(err);
+        }
+    });
+
     //SUBTELA "MINHAS LIGAS"
     async function carregarMinhasLigas() {
     const lista = document.getElementById('listaMinhasLigas');
