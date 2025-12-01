@@ -72,3 +72,43 @@ document.addEventListener('click', function(e) {
     if (botao.id === 'btnVoltarEntrarLiga') mostrarTela('ligas');
     if (botao.id === 'btnVoltarMinhasLigas') mostrarTela('ligas');
 });
+
+// TELA DE HISTÓRICO
+document.getElementById("btnHistorico").addEventListener("click", function () {
+
+    fetch("get_history.php")
+        .then(response => response.json())
+        .then(data => {
+
+            let tabela = document.querySelector("#tabelaHistorico tbody");
+            tabela.innerHTML = "";
+
+            if (data.length === 0) {
+                tabela.innerHTML = `
+                    <tr>
+                        <td colspan="3">Nenhuma partida encontrada.</td>
+                    </tr>
+                `;
+                trocarTela("tela-historico");
+                return;
+            }
+
+            data.forEach(match => {
+                let dataFormatada = new Date(match.match_date).toLocaleString("pt-BR");
+                let linha = document.createElement("tr");
+                linha.innerHTML = `
+                    <td>${dataFormatada}</td>
+                    <td>${match.points}</td>
+                    <td>${match.match_time}s</td>
+                `;
+                tabela.appendChild(linha);
+            });
+
+            trocarTela("tela-historico");
+        });
+});
+
+// BOTÃO VOLTAR
+document.getElementById("btnVoltarHistorico").addEventListener("click", function () {
+    trocarTela('inicial');
+});
