@@ -1,91 +1,56 @@
 <?php
 session_start();
-header("Content-Type: application/json");
+require "db_functions.php";
 
-require 'credentials.php';
-
-//Verifica se o usuário está logado
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Você precisa estar logado para criar uma liga."
-    ]);
+    echo json_encode(["status" => "error", "message" => "Usuário não autenticado"]);
     exit;
 }
 
-//Conexão com o banco
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-if (!$conn) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Erro ao conectar ao banco."
-    ]);
+$user_id = $_SESSION['user_id'];
+
+// Verifica se campos foram enviados
+if (empty($_POST['league_name']) || empty($_POST['league_key'])) {
+    echo json_encode(["status" => "empty", "message" => "Você precisa preencher esse campo."]);
     exit;
 }
 
-//Apenas POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode([
-        "success" => false,
-        "message" => "Método inválido."
-    ]);
-    exit;
-}
+$league_name = trim($_POST['league_name']);
+$league_key = trim($_POST['league_key']);
 
-$league_name = trim($_POST['league_name'] ?? '');
-$league_key = trim($_POST['league_key'] ?? '');
-$creator_id = $_SESSION['user_id'];
+$conn = connect_db();
 
-//Validação dos campos
-if (empty($league_name) || empty($league_key)) {
-    echo json_encode([
-        "success" => false,
-        "message" => "O nome e a palavra-chave são obrigatórios."
-    ]);
-    exit;
-}
-
-//Verifica se a chave já existe
-$stmt = mysqli_prepare($conn, "SELECT id FROM leagues WHERE league_key = ?");
-mysqli_stmt_bind_param($stmt, "s", $league_key);
+// Verifica se a liga já existe
+$sql_check = "SELECT id FROM leagues WHERE league_name = ?";
+$stmt = mysqli_prepare($conn, $sql_check);
+mysqli_stmt_bind_param($stmt, "s", $league_name);
 mysqli_stmt_execute($stmt);
-mysqli_stmt_store_result($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
-if (mysqli_stmt_num_rows($stmt) > 0) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Essa palavra-chave já está em uso."
-    ]);
+if (mysqli_num_rows($result) > 0) {
+    echo json_encode(["status" => "exists", "message" => "Liga já cadastrada"]);
+    disconnect_db($conn);
     exit;
 }
 
-mysqli_stmt_close($stmt);
-
-//Inserir liga
-$stmt = mysqli_prepare(
-    $conn,
-    "INSERT INTO leagues (league_name, league_key, creator_id) VALUES (?, ?, ?)"
-);
-mysqli_stmt_bind_param($stmt, "ssi", $league_name, $league_key, $creator_id);
+// Insere a liga
+$sql_insert = "INSERT INTO leagues (league_name, league_key, creator_id) VALUES (?, ?, ?)";
+$stmt = mysqli_prepare($conn, $sql_insert);
+mysqli_stmt_bind_param($stmt, "ssi", $league_name, $league_key, $user_id);
 
 if (mysqli_stmt_execute($stmt)) {
-    echo json_encode([
-        "success" => true,
-        "message" => "Liga criada com sucesso!",
-        "league" => [
-            "id" => mysqli_insert_id($conn),
-            "league_name" => $league_name,
-            "league_key" => $league_key,
-            "creator_id" => $creator_id
-        ]
-    ]);
+    $league_id = mysqli_insert_id($conn);
+
+    // Adiciona automaticamente o criador na tabela users_leagues
+    $sql_user_league = "INSERT INTO users_leagues (user_id, league_id) VALUES (?, ?)";
+    $stmt2 = mysqli_prepare($conn, $sql_user_league);
+    mysqli_stmt_bind_param($stmt2, "ii", $user_id, $league_id);
+    mysqli_stmt_execute($stmt2);
+
+    echo json_encode(["status" => "success", "message" => "Liga criada com sucesso!"]);
 } else {
-    echo json_encode([
-        "success" => false,
-        "message" => "Erro ao criar liga."
-    ]);
+    echo json_encode(["status" => "error", "message" => "Erro ao criar liga"]);
 }
 
-mysqli_stmt_close($stmt);
-mysqli_close($conn);
+disconnect_db($conn);
 ?>
