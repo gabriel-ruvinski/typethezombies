@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $password = md5($password);
       
       try {
-        $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
+        $sql = "INSERT INTO users (username, email, user_password) VALUES ('$name', '$email', '$password')";
         
         if(mysqli_query($conn, $sql)){
           $success = true;
