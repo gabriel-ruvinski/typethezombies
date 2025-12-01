@@ -140,7 +140,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!--- Essa parte será preenchida com o fetch(get_history.php) no main.js --->
+                <!--- Essa parte será preenchida com o main.js --->
             </tbody>
         </table>
         <button id="btnVoltarHistorico">Voltar</button>
@@ -187,7 +187,7 @@
             <h3>Minhas Ligas</h3>
 
             <ul id="listaMinhasLigas">
-            <!-- Ligas do usuário aparecem aqui -->
+            <!--- Essa parte será preenchida com o main.js --->
             </ul>
 
             <button id="btnVoltarMinhasLigas">Voltar</button>
@@ -228,6 +228,10 @@
         <button id="btnVoltarRankingLiga">Voltar</button>
     </div>
 
+    <script src="scripts/main.js"></script>
+    <script src="scripts/game.js"></script>
+</body>
+</html>
     <script src="scripts/main.js"></script>
     <script src="scripts/game.js"></script>
 </body>
