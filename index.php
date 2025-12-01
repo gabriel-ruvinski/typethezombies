@@ -15,7 +15,7 @@
             <h1>Type the Zombies</h1>
             <div class="menu">
                 <button class="botao" id="btnJogar">Jogar</button>
-                <button class="botao" id="btnStats">Estatísticas</button>
+                <button class="botao" id="btnHistorico">Histórico</button>
                 <button class="botao" id="btnConfig">Configurações</button>
                 <form action="php/logout.php" method="post" class="form-inline">
                     <button type="submit" class="botao">Logout</button>
@@ -129,18 +129,6 @@
         </form>
     </div>
 
-    <div class="tela tela-estatisticas" style="display: none;">
-        <h2>Estatísticas Gerais</h2>
-
-        <div id="estatisticasConteudo">
-            <p>Total de partidas: 0</p>
-            <p>Maior pontuação: 0</p>
-            <p>Média de pontos: 0</p>
-        </div>
-
-        <button id="btnVoltarStats">Voltar</button>
-    </div>
-
     <div class="tela tela-historico" style="display: none;">
         <h2>Histórico de Partidas</h2>
         <table id="tabelaHistorico">
@@ -152,7 +140,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!--- Essa parte vai ser preenchida utilizando PHP --->
+                <!--- Essa parte será preenchida com o fetch(get_history.php) no main.js --->
             </tbody>
         </table>
         <button id="btnVoltarHistorico">Voltar</button>
