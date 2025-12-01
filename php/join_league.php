@@ -1,107 +1,55 @@
 <?php
 session_start();
-header("Content-Type: application/json");
+require "db_functions.php";
 
-require 'credentials.php';
-
-//Verifica se o usuário está logado
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Você precisa estar logado para entrar em uma liga."
-    ]);
+    echo json_encode(["status" => "error", "message" => "Usuário não autenticado"]);
     exit;
 }
 
 $user_id = $_SESSION['user_id'];
 
-//Conexão com o banco
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-if (!$conn) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Erro ao conectar ao banco."
-    ]);
+if (empty($_POST['league_id']) || empty($_POST['league_key'])) {
+    echo json_encode(["status" => "empty", "message" => "Você precisa preencher esse campo."]);
     exit;
 }
 
-//Apenas POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode([
-        "success" => false,
-        "message" => "Método inválido."
-    ]);
-    exit;
-}
+$league_id = intval($_POST['league_id']);
+$league_key = trim($_POST['league_key']);
 
-$league_key = trim($_POST['league_key'] ?? '');
+$conn = connect_db();
 
-//Verificação do campo palavra-chave
-if (empty($league_key)) {
-    echo json_encode([
-        "success" => false,
-        "message" => "A palavra-chave é obrigatória."
-    ]);
-    exit;
-}
-
-//1.Busca liga pela palavra-chave
-$stmt = mysqli_prepare($conn, "SELECT id, league_name FROM leagues WHERE league_key = ?");
-mysqli_stmt_bind_param($stmt, "s", $league_key);
+// Verifica se liga existe e a chave confere
+$sql = "SELECT * FROM leagues WHERE id = ? AND league_key = ?";
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt, "is", $league_id, $league_key);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
-$league = mysqli_fetch_assoc($result);
 
-if (!$league) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Liga não encontrada."
-    ]);
+if (mysqli_num_rows($result) === 0) {
+    echo json_encode(["status" => "notfound", "message" => "Erro. Liga não existe."]);
+    disconnect_db($conn);
     exit;
 }
 
-$league_id = $league['id'];
-mysqli_stmt_close($stmt);
-
-//2.Verifica se o usuário já participa da liga
-$stmt = mysqli_prepare($conn, "SELECT id FROM users_leagues WHERE user_id = ? AND league_id = ?");
+// Verifica se o usuário já está na liga
+$sql_check = "SELECT * FROM users_leagues WHERE user_id = ? AND league_id = ?";
+$stmt = mysqli_prepare($conn, $sql_check);
 mysqli_stmt_bind_param($stmt, "ii", $user_id, $league_id);
 mysqli_stmt_execute($stmt);
-mysqli_stmt_store_result($stmt);
+$result_check = mysqli_stmt_get_result($stmt);
 
-if (mysqli_stmt_num_rows($stmt) > 0) {
-    echo json_encode([
-        "success" => false,
-        "message" => "Você já está nessa liga."
-    ]);
-    exit;
+if (mysqli_num_rows($result_check) === 0) {
+    $sql_insert = "INSERT INTO users_leagues (user_id, league_id) VALUES (?, ?)";
+    $stmt = mysqli_prepare($conn, $sql_insert);
+    mysqli_stmt_bind_param($stmt, "ii", $user_id, $league_id);
+    mysqli_stmt_execute($stmt);
 }
 
-mysqli_stmt_close($stmt);
+echo json_encode(["status" => "success", "message" => "Você entrou na liga!"]);
 
-//3.Insere o usuário na liga
-$stmt = mysqli_prepare(
-    $conn,
-    "INSERT INTO users_leagues (user_id, league_id) VALUES (?, ?)"
-);
-mysqli_stmt_bind_param($stmt, "ii", $user_id, $league_id);
-
-if (mysqli_stmt_execute($stmt)) {
-    echo json_encode([
-        "success" => true,
-        "message" => "Você entrou na liga com sucesso!",
-        "league" => [
-            "id" => $league_id,
-            "name" => $league['league_name'],
-            "key" => $league_key
-        ]
-    ]);
-} else {
-    echo json_encode([
-        "success" => false,
-        "message" => "Erro ao entrar na liga."
-    ]);
-}
+disconnect_db($conn);
+?>
 
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
