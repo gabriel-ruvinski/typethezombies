@@ -32,8 +32,6 @@
                     ...dados.medio,
                     ...dados.dificil
                 ];
-
-                console.log('Palavras carregadas:', this.palavras.length);
             } catch (error) {
                 console.error('Erro ao carregar palavras:', error);
 
@@ -217,7 +215,8 @@
                 }
             });
             this.zumbisAtivos = [];
-            
+            this.salvarPartida();
+
             setTimeout(() => {
                 alert(`Fim de Jogo!\nPontuação: ${this.pontuacao}`);
                 this.voltarMenu();
@@ -234,6 +233,33 @@
             this.inputPalavra.value = '';
             this.palavraAtual.textContent = '';
         }
+
+        async salvarPartida() {
+            try {
+                const formData = new FormData();
+                formData.append('pontuacao', this.pontuacao);
+                const response = await fetch('php/save_match.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const texto = await response.text();
+
+                try {
+                    const data = JSON.parse(texto);
+                    if (data.success) {
+                        console.log('Partida salva com sucesso');
+                    } else {
+                        console.error('Erro ao salvar:', data.message);
+                    }
+                } catch (e) {
+                    console.error('Resposta não é JSON válido:', texto);
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+            }
+        }
+
     }
     const jogo = new WordsVsZombies();
 })();
