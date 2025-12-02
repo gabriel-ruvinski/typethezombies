@@ -217,7 +217,7 @@
                 }
             });
             this.zumbisAtivos = [];
-
+            
             setTimeout(() => {
                 alert(`Fim de Jogo!\nPontuação: ${this.pontuacao}`);
                 this.voltarMenu();
