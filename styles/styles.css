@@ -910,6 +910,7 @@ body {
     opacity: 0.8;
     margin-top: 4px;
     display: block;
+    pointer-events: none; 
 }
 
 /* Informação do período */

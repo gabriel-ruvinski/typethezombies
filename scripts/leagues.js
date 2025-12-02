@@ -11,6 +11,10 @@
             this.rankingLigaAtual = [];
             this.ligaSelecionada = null;
 
+            this.carregandoRankingGeral = false;
+            this.carregandoRankingSemanal = false;
+            this.carregandoLigas = false;
+
             this.inicializarElementos();
             this.inicializarEventos();
             this.carregarDadosIniciais();
@@ -41,8 +45,6 @@
 
         // Carregar ranking semanal
         async carregarRankingSemanal() {
-            console.log('Carregando ranking semanal...');
-
             try {
                 const data = await this.apiRequest('get_ranking_semanal');
 
@@ -408,27 +410,21 @@
                 formData.append(key, dados[key]);
             });
 
-            console.log(`📤 Enviando ação: ${action}`, dados);
-
             try {
                 const response = await fetch('php/leagues.php', {
                     method: 'POST',
                     body: formData
                 });
 
-                console.log(`📥 Status da resposta: ${response.status}`);
-
                 // PRIMEIRO pegue o texto bruto
                 const textoBruto = await response.text();
-                console.log('📄 Resposta bruta (primeiros 500 chars):', textoBruto.substring(0, 500));
 
                 // Depois tente parsear como JSON
                 try {
                     const jsonData = JSON.parse(textoBruto);
-                    console.log(`✅ JSON parseado para ação "${action}":`, jsonData);
                     return jsonData;
                 } catch (jsonError) {
-                    console.error(`❌ Erro ao parsear JSON para "${action}":`, jsonError.message);
+                    console.error(`Erro ao parsear JSON para "${action}":`, jsonError.message);
                     console.error('Texto recebido:', textoBruto);
 
                     // Retorna erro padrão se não conseguir parsear
@@ -439,7 +435,7 @@
                 }
 
             } catch (error) {
-                console.error(`❌ Erro de rede/fetch para "${action}":`, error);
+                console.error(`Erro de rede/fetch para "${action}":`, error);
                 return {
                     success: false,
                     message: 'Erro de conexão: ' + error.message

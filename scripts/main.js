@@ -135,7 +135,7 @@ document.addEventListener('click', function (e) {
     }
 
     if (botao.id === 'btnVoltarRankingLiga') {
-        mostrarTela('ranking');
+        mostrarTela('minhasLigas');
     }
 
     if (botao.id === 'btnIrParaRanking') {
