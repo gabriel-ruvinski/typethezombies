@@ -204,11 +204,6 @@ require "php/authenticate.php";
                     <small>Pontuações desta semana</small>
                 </button>
 
-                <button class="botao ranking-opcao" id="btnRankingLigas">
-                    Ranking das Ligas
-                    <small>Ver por liga específica</small>
-                </button>
-
                 <button class="botao botao-voltar" id="btnVoltarRanking">Voltar</button>
             </div>
         </div>

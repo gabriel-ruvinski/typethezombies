@@ -115,10 +115,6 @@ document.addEventListener('click', function (e) {
         }
     }
 
-    if (botao.id === 'btnRankingLigas') {
-        mostrarTela('ligas'); // Ou pode ir direto para selecionar liga
-    }
-
     if (botao.id === 'btnRankingGeral') {
         if (window.leagueSystem) {
             window.leagueSystem.carregarRankingGeral();
