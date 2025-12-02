@@ -205,8 +205,8 @@
                 }
             }, 1000);
         }
-        
-            fimDeJogo() {
+
+        fimDeJogo() {
             this.jogoAtivo = false;
             clearInterval(this.timerInterval);
 
@@ -217,7 +217,10 @@
                 }
             });
             this.zumbisAtivos = [];
-            this.voltarMenu();
+
+            setTimeout(() => {
+                alert(`Fim de Jogo!\nPontuação: ${this.pontuacao}`);
+                this.voltarMenu();
             }, 500);
         }
 
