@@ -410,14 +410,14 @@ body {
 }
 
 /* === TELA DE LOGIN === */
-.tela-login {
+.tela-login, .tela-criar-liga, .tela-entrar-liga {
   text-align: center;
   padding: 40px 30px;
   max-width: 400px;
   margin: 0 auto;
 }
 
-.form-login {
+.form-login, .form-liga {
   max-width: 350px;
   margin: 0 auto;
 }
@@ -742,11 +742,6 @@ body {
 }
 
 /* Formulários de liga - Padronizados com outros forms */
-.form-liga {
-    max-width: 350px;
-    margin: 0 auto;
-}
-
 .form-liga .form-group {
     margin-bottom: 20px;
     text-align: left;
@@ -948,18 +943,3 @@ body {
 .posicao-1 .posicao-badge { background: gold; color: black; }
 .posicao-2 .posicao-badge { background: silver; color: black; }
 .posicao-3 .posicao-badge { background: #CD7F32; color: white; }
-
-.tela-criar-liga,
-.tela-entrar-liga {
-    max-width: 450px !important;
-    width: 90% !important;
-    margin: 0 auto !important;
-    padding: 25px !important;
-}
-
-/* Formulários dentro dessas telas */
-.tela-criar-liga .form-liga,
-.tela-entrar-liga .form-liga {
-    max-width: 100% !important;
-    margin: 0 auto !important;
-}

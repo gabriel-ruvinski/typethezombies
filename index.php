@@ -21,7 +21,7 @@ require "php/authenticate.php";
                 <button class="botao" id="btnHistorico">Histórico</button>
                 <button class="botao" id="btnConfig">Configurações</button>
                 <form action="php/logout.php" method="post" class="form-inline">
-                    <button type="submit" class="botao">Logout</button>
+                    <button type="submit" class="botao botao-voltar">Logout</button>
                 </form>
             </div>
             <p class="rodape">© 2025 Todos os direitos reservados.</p>
