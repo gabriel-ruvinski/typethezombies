@@ -26,9 +26,9 @@
     // Tabela: usuarios
     $sql = "CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(100) NOT NULL,
+        username VARCHAR(100) NOT NULL,
         email VARCHAR(120) NOT NULL UNIQUE,
-        password VARCHAR(150) NOT NULL
+        user_password VARCHAR(150) NOT NULL
     )";
 
     if (mysqli_query($conn, $sql)) {
