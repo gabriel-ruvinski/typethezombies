@@ -28,6 +28,8 @@ const telas = {
     registro: document.querySelector(".tela-registro"),
     historico: document.querySelector(".tela-historico"),
     ligas: document.querySelector(".tela-ligas"),
+    ranking: document.querySelector(".tela-ranking"),
+    rankingSemanal: document.querySelector(".tela-ranking-semanal"),
     rankingGeral: document.querySelector(".tela-ranking-geral"),
     rankingLiga: document.querySelector(".tela-ranking-liga"),
     criarLiga: document.querySelector(".tela-criar-liga"),
@@ -103,11 +105,44 @@ document.addEventListener('click', function (e) {
         }
     }
 
-    if (botao.id === 'btnRankingGeral') {
-        if (window.leagueSystem && typeof window.leagueSystem.carregarRankingGeral === 'function') {
-            window.leagueSystem.carregarRankingGeral();
-        } else {
-            mostrarTela('rankingGeral');
+    if (botao.id === 'btnRanking') {
+        mostrarTela('ranking');
+    }
+
+    if (botao.id === 'btnRankingSemanal') {
+        if (window.leagueSystem) {
+            window.leagueSystem.carregarRankingSemanal();
         }
+    }
+
+    if (botao.id === 'btnRankingLigas') {
+        mostrarTela('ligas'); // Ou pode ir direto para selecionar liga
+    }
+
+    if (botao.id === 'btnRankingGeral') {
+        if (window.leagueSystem) {
+            window.leagueSystem.carregarRankingGeral();
+        }
+    }
+
+    // Botões de voltar
+    if (botao.id === 'btnVoltarRanking') {
+        mostrarTela('ligas');
+    }
+
+    if (botao.id === 'btnVoltarRankingSemanal') {
+        mostrarTela('ranking');
+    }
+
+    if (botao.id === 'btnVoltarRankingGeral') {
+        mostrarTela('ranking');
+    }
+
+    if (botao.id === 'btnVoltarRankingLiga') {
+        mostrarTela('ranking');
+    }
+
+    if (botao.id === 'btnIrParaRanking') {
+        mostrarTela('ranking');
     }
 });

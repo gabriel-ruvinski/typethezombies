@@ -126,8 +126,8 @@ require "php/authenticate.php";
                 <button class="botao" id="btnCriarLiga">Criar Liga</button>
                 <button class="botao" id="btnEntrarLiga">Entrar em Liga</button>
                 <button class="botao" id="btnMinhasLigas">Minhas Ligas</button>
-                <button class="botao" id="btnRankingGeral">Ranking Geral</button>
-                <button class="botao" id="btnVoltarLigas">Voltar ao Menu</button>
+                <button class="botao" id="btnIrParaRanking">Ranking</button>
+                <button class="botao" id="btnVoltarLigas">Voltar</button>
             </div>
         </div>
     </div>
@@ -188,6 +188,32 @@ require "php/authenticate.php";
         </div>
     </div>
 
+    <div class="tela tela-ranking" style="display: none;">
+        <div class="container-config">
+            <h2>Sistema de Rankings</h2>
+            <p>Escolha o tipo de ranking que deseja visualizar:</p>
+
+            <div class="menu-ranking">
+                <button class="botao ranking-opcao" id="btnRankingGeral">
+                    Ranking Geral
+                    <small>Todas as pontuações desde o início</small>
+                </button>
+
+                <button class="botao ranking-opcao" id="btnRankingSemanal">
+                    Ranking Semanal
+                    <small>Pontuações desta semana</small>
+                </button>
+
+                <button class="botao ranking-opcao" id="btnRankingLigas">
+                    Ranking das Ligas
+                    <small>Ver por liga específica</small>
+                </button>
+
+                <button class="botao botao-voltar" id="btnVoltarRanking">Voltar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- TELA RANKING GERAL -->
     <div class="tela tela-ranking-geral" style="display: none;">
         <div class="container-config">
@@ -209,6 +235,33 @@ require "php/authenticate.php";
             </table>
             <div class="form-botoes">
                 <button class="botao botao-voltar" id="btnVoltarRankingGeral">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="tela tela-ranking-semanal" style="display: none;">
+        <div class="container-config">
+            <h2>Ranking Semanal</h2>
+            <div class="periodo-info" id="periodoSemanal">
+                <!-- Período será preenchido via JS -->
+            </div>
+            <table id="RankingSemanalTabela" class="tabela-ranking">
+                <thead>
+                    <tr>
+                        <th width="80">Posição</th>
+                        <th>Jogador</th>
+                        <th width="120">Pontos</th>
+                        <th width="120">Partidas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4">Carregando ranking semanal...</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-botoes">
+                <button class="botao botao-voltar" id="btnVoltarRankingSemanal">Voltar</button>
             </div>
         </div>
     </div>

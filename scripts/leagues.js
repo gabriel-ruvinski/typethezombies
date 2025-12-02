@@ -10,7 +10,7 @@
             this.rankingGeral = [];
             this.rankingLigaAtual = [];
             this.ligaSelecionada = null;
-           
+
             this.inicializarElementos();
             this.inicializarEventos();
             this.carregarDadosIniciais();
@@ -37,6 +37,73 @@
                 console.error('Erro ao definir liga ativa:', error);
                 this.mostrarMensagem('Erro de conexão', 'erro');
             }
+        }
+
+        // Carregar ranking semanal
+        async carregarRankingSemanal() {
+            console.log('Carregando ranking semanal...');
+
+            try {
+                const data = await this.apiRequest('get_ranking_semanal');
+
+                if (data.success) {
+                    this.rankingSemanal = data.ranking || [];
+                    this.periodoSemanal = data.periodo || {};
+                    this.renderizarRankingSemanal();
+                    mostrarTela('rankingSemanal');
+                } else {
+                    this.mostrarMensagem(data.message || 'Erro ao carregar ranking semanal', 'erro');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar ranking semanal:', error);
+                this.mostrarMensagem('Erro de conexão', 'erro');
+            }
+        }
+
+        // Renderizar ranking semanal
+        renderizarRankingSemanal() {
+            const tbody = document.getElementById('RankingSemanalTabela')?.querySelector('tbody');
+            const periodoInfo = document.getElementById('periodoSemanal');
+
+            if (!tbody) return;
+
+            // Mostrar período
+            if (periodoInfo && this.periodoSemanal) {
+                periodoInfo.innerHTML = `
+                Período: <strong>${this.periodoSemanal.inicio}</strong> 
+                até <strong>${this.periodoSemanal.fim}</strong>
+            `;
+            }
+
+            if (this.rankingSemanal.length === 0) {
+                tbody.innerHTML = `
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 30px;">
+                        Nenhuma pontuação esta semana. Seja o primeiro!
+                    </td>
+                </tr>
+            `;
+                return;
+            }
+
+            const html = this.rankingSemanal.map((jogador, index) => {
+                const classePosicao = index === 0 ? 'posicao-1' :
+                    index === 1 ? 'posicao-2' :
+                        index === 2 ? 'posicao-3' : '';
+
+                return `
+                <tr class="${classePosicao}">
+                    <td>
+                        <div class="posicao-badge">${index + 1}</div>
+                    </td>
+                    <td>${jogador.nome}</td>
+                    <td>${jogador.pontuacao}</td>
+                    <td>${jogador.partidas}</td>
+                </tr>
+            `;
+            }).join('');
+
+            tbody.innerHTML = html;
         }
 
         elementosExistem() {
@@ -75,6 +142,23 @@
                     e.preventDefault();
                     this.entrarLiga();
                 });
+            }
+        }
+
+        mostrarSelecaoLigaRanking(ligas) {
+            let mensagem = 'Selecione uma liga para ver o ranking:\n\n';
+
+            ligas.forEach((liga, index) => {
+                mensagem += `${index + 1}. ${liga.nome} (ID: ${liga.id})\n`;
+            });
+
+            const ligaId = prompt(mensagem + '\nDigite o número da liga:');
+
+            if (ligaId && !isNaN(ligaId)) {
+                const index = parseInt(ligaId) - 1;
+                if (index >= 0 && index < ligas.length) {
+                    this.carregarRankingLiga(ligas[index].id);
+                }
             }
         }
 
@@ -324,16 +408,43 @@
                 formData.append(key, dados[key]);
             });
 
-            const response = await fetch('php/leagues.php', {
-                method: 'POST',
-                body: formData
-            });
+            console.log(`📤 Enviando ação: ${action}`, dados);
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            try {
+                const response = await fetch('php/leagues.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                console.log(`📥 Status da resposta: ${response.status}`);
+
+                // PRIMEIRO pegue o texto bruto
+                const textoBruto = await response.text();
+                console.log('📄 Resposta bruta (primeiros 500 chars):', textoBruto.substring(0, 500));
+
+                // Depois tente parsear como JSON
+                try {
+                    const jsonData = JSON.parse(textoBruto);
+                    console.log(`✅ JSON parseado para ação "${action}":`, jsonData);
+                    return jsonData;
+                } catch (jsonError) {
+                    console.error(`❌ Erro ao parsear JSON para "${action}":`, jsonError.message);
+                    console.error('Texto recebido:', textoBruto);
+
+                    // Retorna erro padrão se não conseguir parsear
+                    return {
+                        success: false,
+                        message: 'Resposta inválida do servidor'
+                    };
+                }
+
+            } catch (error) {
+                console.error(`❌ Erro de rede/fetch para "${action}":`, error);
+                return {
+                    success: false,
+                    message: 'Erro de conexão: ' + error.message
+                };
             }
-
-            return await response.json();
         }
 
         // Sistema de mensagens

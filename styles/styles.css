@@ -870,3 +870,60 @@ body {
     90% { opacity: 1; transform: translateY(0); }
     100% { opacity: 0; transform: translateY(-20px); }
 }
+
+/* === NOVOS ESTILOS PARA RANKING === */
+
+/* Menu de seleção de ranking */
+.menu-ranking {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin: 30px 0;
+}
+
+/* Opções de ranking */
+.ranking-opcao {
+    width: 300px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.ranking-opcao small {
+    font-size: 0.8em;
+    opacity: 0.8;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Informação do período */
+.periodo-info {
+    background: rgba(0, 255, 102, 0.1);
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 15px 0;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+/* Badges para posições */
+.posicao-badge {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.posicao-1 .posicao-badge { background: gold; color: black; }
+.posicao-2 .posicao-badge { background: silver; color: black; }
+.posicao-3 .posicao-badge { background: #CD7F32; color: white; }
