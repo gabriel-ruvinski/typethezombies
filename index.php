@@ -127,51 +127,47 @@ require "php/authenticate.php";
                 <button class="botao" id="btnEntrarLiga">Entrar em Liga</button>
                 <button class="botao" id="btnMinhasLigas">Minhas Ligas</button>
                 <button class="botao" id="btnIrParaRanking">Ranking</button>
-                <button class="botao" id="btnVoltarLigas">Voltar</button>
+                <button class="botao botao-voltar" id="btnVoltarLigas">Voltar</button>
             </div>
         </div>
     </div>
 
     <!-- TELA CRIAR LIGA -->
     <div class="tela tela-criar-liga" style="display: none;">
-        <div class="container-config">
-            <h2>Criar Nova Liga</h2>
-            <form id="formCriarLiga" class="form-liga">
-                <div class="form-group">
-                    <label for="ligaNome">Nome da Liga:</label>
-                    <input type="text" id="ligaNome" required placeholder="Digite o nome da liga">
-                </div>
-                <div class="form-group">
-                    <label for="ligaSenha">Palavra-chave:</label>
-                    <input type="password" id="ligaSenha" required placeholder="Crie uma senha para a liga">
-                </div>
-                <div class="form-botoes">
-                    <button type="submit" class="botao">Criar Liga</button>
-                    <button type="button" class="botao botao-voltar" id="btnVoltarCriarLiga">Voltar</button>
-                </div>
-            </form>
-        </div>
+        <h2>Criar Nova Liga</h2>
+        <form id="formCriarLiga" class="form-liga">
+            <div class="form-group">
+                <label for="ligaNome">Nome da Liga:</label>
+                <input type="text" id="ligaNome" required placeholder="Digite o nome da liga">
+            </div>
+            <div class="form-group">
+                <label for="ligaSenha">Palavra-chave:</label>
+                <input type="password" id="ligaSenha" required placeholder="Crie uma senha para a liga">
+            </div>
+            <div class="form-botoes">
+                <button type="submit" class="botao">Criar Liga</button>
+                <button type="button" class="botao botao-voltar" id="btnVoltarCriarLiga">Voltar</button>
+            </div>
+        </form>
     </div>
 
     <!-- TELA ENTRAR LIGA -->
     <div class="tela tela-entrar-liga" style="display: none;">
-        <div class="container-config">
-            <h2>Entrar em Liga</h2>
-            <form id="formEntrarLiga" class="form-liga">
-                <div class="form-group">
-                    <label for="ligaID">ID da Liga:</label>
-                    <input type="text" id="ligaID" required placeholder="Digite o ID da liga">
-                </div>
-                <div class="form-group">
-                    <label for="ligaSenhaEntrada">Palavra-chave:</label>
-                    <input type="password" id="ligaSenhaEntrada" required placeholder="Digite a senha da liga">
-                </div>
-                <div class="form-botoes">
-                    <button type="submit" class="botao">Entrar na Liga</button>
-                    <button type="button" class="botao botao-voltar" id="btnVoltarEntrarLiga">Voltar</button>
-                </div>
-            </form>
-        </div>
+        <h2>Entrar em Liga</h2>
+        <form id="formEntrarLiga" class="form-liga">
+            <div class="form-group">
+                <label for="ligaID">ID da Liga:</label>
+                <input type="text" id="ligaID" required placeholder="Digite o ID da liga">
+            </div>
+            <div class="form-group">
+                <label for="ligaSenhaEntrada">Palavra-chave:</label>
+                <input type="password" id="ligaSenhaEntrada" required placeholder="Digite a senha da liga">
+            </div>
+            <div class="form-botoes">
+                <button type="submit" class="botao">Entrar na Liga</button>
+                <button type="button" class="botao botao-voltar" id="btnVoltarEntrarLiga">Voltar</button>
+            </div>
+        </form>
     </div>
 
     <!-- TELA MINHAS LIGAS -->
@@ -191,8 +187,6 @@ require "php/authenticate.php";
     <div class="tela tela-ranking" style="display: none;">
         <div class="container-config">
             <h2>Sistema de Rankings</h2>
-            <p>Escolha o tipo de ranking que deseja visualizar:</p>
-
             <div class="menu-ranking">
                 <button class="botao ranking-opcao" id="btnRankingGeral">
                     Ranking Geral

@@ -10,14 +10,14 @@ if (!$login && $_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn = connect_db();
 
-    $email = mysqli_real_escape_string($conn,$_POST["email"]);
-    $password = mysqli_real_escape_string($conn,$_POST["password"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $password = mysqli_real_escape_string($conn, $_POST["password"]);
     $password = md5($password);
 
     $sql = "SELECT id,username,email,user_password FROM users WHERE email = '$email';";
 
     $result = mysqli_query($conn, $sql);
-    if($result){
+    if ($result) {
       if (mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
 
@@ -28,23 +28,19 @@ if (!$login && $_SERVER["REQUEST_METHOD"] == "POST") {
 
           header("Location: ../index.php");
           exit();
-        }
-        else {
+        } else {
           $error_msg = "Senha incorreta!";
           $error = true;
         }
-      }
-      else{
+      } else {
         $error_msg = "Usuário não encontrado!";
         $error = true;
       }
-    }
-    else {
+    } else {
       $error_msg = mysqli_error($conn);
       $error = true;
     }
-  }
-  else {
+  } else {
     $error_msg = "Por favor, preencha todos os dados.";
     $error = true;
   }
@@ -53,12 +49,14 @@ if (!$login && $_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Type the Zombies</title>
   <link rel="stylesheet" href="../styles/styles.css">
 </head>
+
 <body>
   <div class="tela tela-login">
     <h1>Login</h1>
@@ -89,7 +87,10 @@ if (!$login && $_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div class="form-botoes">
           <input type="submit" name="submit" value="Entrar" class="botao">
-          <a href="../index.php" class="botao botao-voltar">Voltar</a>
+          <button type="button" onclick="window.location.href='../index.php'"
+            class="botao botao-voltar">
+            Voltar
+          </button>
         </div>
 
         <div class="login-links">
@@ -100,4 +101,5 @@ if (!$login && $_SERVER["REQUEST_METHOD"] == "POST") {
     <?php endif; ?>
   </div>
 </body>
+
 </html>

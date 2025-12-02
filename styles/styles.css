@@ -253,7 +253,7 @@ body {
 }
 
 /* 4.2 Grids e Flexbox */
-.menu {
+.menu, .menu-ligas {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -572,13 +572,7 @@ body {
 }
 
 /* Menu das ligas - Padronizado com .menu da tela inicial */
-.menu-ligas {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    margin: 30px 0;
-}
+
 
 .menu-ligas h2 {
     color: var(--cor-texto);
@@ -877,9 +871,36 @@ body {
 .menu-ranking {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     align-items: center;
-    margin: 30px 0;
+    text-align: center;
+    padding: 20px;
+    max-width: 400px;
+}
+
+.tala-ranking {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    max-width: 400px;
+}
+
+.container-config {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    max-width: 400px;
+}
+
+.menu-ranking h2 {
+    color: var(--cor-texto);
+    margin-bottom: 20px;
 }
 
 /* Opções de ranking */
@@ -927,3 +948,18 @@ body {
 .posicao-1 .posicao-badge { background: gold; color: black; }
 .posicao-2 .posicao-badge { background: silver; color: black; }
 .posicao-3 .posicao-badge { background: #CD7F32; color: white; }
+
+.tela-criar-liga,
+.tela-entrar-liga {
+    max-width: 450px !important;
+    width: 90% !important;
+    margin: 0 auto !important;
+    padding: 25px !important;
+}
+
+/* Formulários dentro dessas telas */
+.tela-criar-liga .form-liga,
+.tela-entrar-liga .form-liga {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+}

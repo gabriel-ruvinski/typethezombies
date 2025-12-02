@@ -10,27 +10,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn = connect_db();
 
-    $name = mysqli_real_escape_string($conn,$_POST["name"]);
-    $email = mysqli_real_escape_string($conn,$_POST["email"]);
-    $password = mysqli_real_escape_string($conn,$_POST["password"]);
-    $confirm_password = mysqli_real_escape_string($conn,$_POST["confirm_password"]);
+    $name = mysqli_real_escape_string($conn, $_POST["name"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $password = mysqli_real_escape_string($conn, $_POST["password"]);
+    $confirm_password = mysqli_real_escape_string($conn, $_POST["confirm_password"]);
 
     if ($password == $confirm_password) {
       $password = md5($password);
-      
+
       try {
         $sql = "INSERT INTO users (username, email, user_password) VALUES ('$name', '$email', '$password')";
-        
-        if(mysqli_query($conn, $sql)){
+
+        if (mysqli_query($conn, $sql)) {
           $success = true;
-        }
-        else {
+        } else {
           throw new Exception(mysqli_error($conn)); // Converte erro em exceção
         }
-      } 
-      catch (Exception $e) {
+      } catch (Exception $e) {
         $error_message = $e->getMessage();
-        
+
         // DETECTA SE É EMAIL DUPLICADO
         if (strpos($error_message, 'Duplicate entry') !== false && strpos($error_message, 'email') !== false) {
           $error_msg = "Este email já está cadastrado! Use outro email ou faça login.";
@@ -39,13 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $error = true;
       }
-    }
-    else {
+    } else {
       $error_msg = "Senha não confere com a confirmação.";
       $error = true;
     }
-  }
-  else {
+  } else {
     $error_msg = "Por favor, preencha todos os dados.";
     $error = true;
   }
@@ -54,11 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>Registro</title>
   <link rel="stylesheet" href="../styles/styles.css">
 </head>
+
 <body>
   <div class="tela tela-registro">
     <h1>Registrar Novo Usuário</h1>
@@ -99,9 +97,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <div class="form-botoes">
         <input type="submit" name="submit" value="Criar Usuário" class="botao">
-        <a href="../index.php" class="botao botao-voltar">Voltar</a>
+        <button type="button" onclick="window.location.href='../index.php'"
+          class="botao botao-voltar">
+          Voltar
+        </button>
       </div>
     </form>
   </div>
 </body>
+
 </html>
