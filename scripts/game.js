@@ -205,27 +205,8 @@
                 }
             }, 1000);
         }
-
-        // Salvar pontuação após uma partida
-        async salvarPontuacao() {
-            try {
-                const dados = new URLSearchParams();
-                dados.append("points", this.pontuacao);
-                dados.append("time", 60 - this.tempo);
-                
-                const response = await fetch("php/save_score.php", {
-                    method: "POST",
-                    body: dados
-                });
-
-                const resultado = await response.json();
-                console.log("Salvar pontuação: ", resultado);
-            } catch (error) {
-                console.error("Erro ao salvar pontuação: ", error);
-            }
-        }
-
-        fimDeJogo() {
+        
+            fimDeJogo() {
             this.jogoAtivo = false;
             clearInterval(this.timerInterval);
 
@@ -236,12 +217,7 @@
                 }
             });
             this.zumbisAtivos = [];
-
-            setTimeout(() => {
-               this.salvarPontuacao().then(() => {
-                alert(`Fim de jogo! \nPontuação: ${this.pontuacao}`);
-                this.voltarMenu();
-               })
+            this.voltarMenu();
             }, 500);
         }
 
