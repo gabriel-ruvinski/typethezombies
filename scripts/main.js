@@ -49,7 +49,7 @@ function mostrarTela(nomeTela) {
 document.addEventListener('click', function (e) {
     const botao = e.target;
 
-    // 🔹 BOTÕES DA TELA INICIAL
+    // BOTÕES DA TELA INICIAL
     if (botao.id === 'btnConfig') mostrarTela('config');
     if (botao.id === 'btnHistorico') mostrarTela('historico');
     if (botao.id === 'btnLigas') mostrarTela('ligas');

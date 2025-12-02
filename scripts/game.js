@@ -32,8 +32,6 @@
                     ...dados.medio,
                     ...dados.dificil
                 ];
-
-                console.log('Palavras carregadas:', this.palavras.length);
             } catch (error) {
                 console.error('Erro ao carregar palavras:', error);
 
@@ -240,16 +238,12 @@
             try {
                 const formData = new FormData();
                 formData.append('pontuacao', this.pontuacao);
-
-                console.log('Salvando partida com pontuação:', this.pontuacao);
-
                 const response = await fetch('php/save_match.php', {
                     method: 'POST',
                     body: formData
                 });
 
                 const texto = await response.text();
-                console.log('Resposta do servidor:', texto);
 
                 try {
                     const data = JSON.parse(texto);

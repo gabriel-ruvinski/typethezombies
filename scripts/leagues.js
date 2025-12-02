@@ -10,26 +10,13 @@
             this.rankingGeral = [];
             this.rankingLigaAtual = [];
             this.ligaSelecionada = null;
-
-            console.log('LeagueSystem constructor chamado');
-
-            // Verifica se os elementos necessários existem
-            if (!this.elementosExistem()) {
-                console.log('Elementos das ligas não encontrados, sistema não inicializado');
-                return;
-            }
-
+           
             this.inicializarElementos();
             this.inicializarEventos();
             this.carregarDadosIniciais();
-
-
-            console.log('LeagueSystem inicializado com sucesso');
         }
 
         async definirLigaAtiva(ligaId) {
-            console.log('Definindo liga ativa:', ligaId);
-
             try {
                 const formData = new FormData();
                 formData.append('liga_id', ligaId);
@@ -42,13 +29,13 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    this.mostrarMensagem('✅ Liga selecionada! Suas próximas partidas contarão aqui.', 'sucesso');
+                    this.mostrarMensagem('Liga selecionada! Suas próximas partidas contarão aqui.', 'sucesso');
                 } else {
-                    this.mostrarMensagem('❌ ' + data.message, 'erro');
+                    this.mostrarMensagem(data.message, 'erro');
                 }
             } catch (error) {
                 console.error('Erro ao definir liga ativa:', error);
-                this.mostrarMensagem('❌ Erro de conexão', 'erro');
+                this.mostrarMensagem('Erro de conexão', 'erro');
             }
         }
 
@@ -66,31 +53,18 @@
         }
 
         inicializarElementos() {
-            console.log('Inicializando elementos...');
-            // Elementos de formulário
             this.formCriarLiga = document.getElementById('formCriarLiga');
             this.formEntrarLiga = document.getElementById('formEntrarLiga');
             this.listaMinhasLigas = document.getElementById('listaMinhasLigas');
             this.tabelaRankingGeral = document.getElementById('RankingGeralTabela');
             this.tabelaRankingLiga = document.getElementById('RankingLigaTabela');
-
-            console.log('Elementos encontrados:', {
-                formCriarLiga: !!this.formCriarLiga,
-                formEntrarLiga: !!this.formEntrarLiga,
-                listaMinhasLigas: !!this.listaMinhasLigas,
-                tabelaRankingGeral: !!this.tabelaRankingGeral,
-                tabelaRankingLiga: !!this.tabelaRankingLiga
-            });
         }
 
         inicializarEventos() {
-            console.log('Inicializando eventos...');
-
             // Formulário de criar liga
             if (this.formCriarLiga) {
                 this.formCriarLiga.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    console.log('Formulário criar liga enviado');
                     this.criarLiga();
                 });
             }
@@ -99,7 +73,6 @@
             if (this.formEntrarLiga) {
                 this.formEntrarLiga.addEventListener('submit', (e) => {
                     e.preventDefault();
-                    console.log('Formulário entrar liga enviado');
                     this.entrarLiga();
                 });
             }
@@ -107,24 +80,20 @@
 
         // Navegação
         mostrarCriarLiga() {
-            console.log('Mostrando tela criar liga');
             mostrarTela('criarLiga');
         }
 
         mostrarEntrarLiga() {
-            console.log('Mostrando tela entrar liga');
             mostrarTela('entrarLiga');
         }
 
         // API
         async carregarDadosIniciais() {
-            console.log('Carregando dados iniciais...');
             try {
                 // Carrega ligas do usuário ao iniciar
                 const data = await this.apiRequest('get_minhas_ligas');
                 if (data.success) {
                     this.ligasUsuario = data.ligas || [];
-                    console.log('Ligas do usuário carregadas:', this.ligasUsuario);
                 }
             } catch (error) {
                 console.error('Erro ao carregar dados iniciais:', error);
@@ -134,8 +103,6 @@
         async criarLiga() {
             const nome = document.getElementById('ligaNome')?.value;
             const palavraChave = document.getElementById('ligaSenha')?.value;
-
-            console.log('Criando liga:', { nome, palavraChave });
 
             if (!nome || !palavraChave) {
                 this.mostrarMensagem('Preencha todos os campos!', 'erro');
@@ -147,8 +114,6 @@
                     nome: nome,
                     palavra_chave: palavraChave
                 });
-
-                console.log('Resposta criar liga:', data);
 
                 if (data.success) {
                     this.mostrarMensagem('Liga criada com sucesso! ID: ' + data.liga_id, 'sucesso');
@@ -167,8 +132,6 @@
             const ligaId = document.getElementById('ligaID')?.value;
             const palavraChave = document.getElementById('ligaSenhaEntrada')?.value;
 
-            console.log('Entrando na liga:', { ligaId, palavraChave });
-
             if (!ligaId || !palavraChave) {
                 this.mostrarMensagem('Preencha todos os campos!', 'erro');
                 return;
@@ -179,8 +142,6 @@
                     liga_id: ligaId,
                     palavra_chave: palavraChave
                 });
-
-                console.log('Resposta entrar liga:', data);
 
                 if (data.success) {
                     this.mostrarMensagem('Entrou na liga com sucesso!', 'sucesso');
@@ -195,10 +156,8 @@
         }
 
         async carregarMinhasLigas() {
-            console.log('Carregando minhas ligas...');
             try {
                 const data = await this.apiRequest('get_minhas_ligas');
-                console.log('Dados minhas ligas:', data);
 
                 if (data.success) {
                     this.ligasUsuario = data.ligas || [];
@@ -214,10 +173,8 @@
         }
 
         async carregarRankingGeral() {
-            console.log('Carregando ranking geral...');
             try {
                 const data = await this.apiRequest('get_ranking_geral');
-                console.log('Dados ranking geral:', data);
 
                 if (data.success) {
                     this.rankingGeral = data.ranking || [];
@@ -293,12 +250,12 @@
             <div class="liga-card-botoes">
                 <button onclick="window.leagueSystem.definirLigaAtiva(${liga.id})" 
                         class="botao-ver-liga">
-                    🎯 Jogar Nesta Liga
+                    Jogar Nesta Liga
                 </button>
                 
                 <button onclick="window.leagueSystem.verLiga(${liga.id})" 
                         class="botao-ranking-liga">
-                    📊 Ver Ranking
+                    Ver Ranking
                 </button>
             </div>
         </div>
@@ -372,8 +329,6 @@
                 formData.append(key, dados[key]);
             });
 
-            console.log(`Enviando requisição para: php/leagues.php, ação: ${action}`, dados);
-
             const response = await fetch('php/leagues.php', {
                 method: 'POST',
                 body: formData
@@ -429,16 +384,12 @@
                     mensagem.remove();
                 }
             }, 3000);
-
-            console.log(`Mensagem ${tipo}: ${texto}`);
         }
     }
 
     // Inicia o sistema quando o DOM estiver pronto
     document.addEventListener('DOMContentLoaded', () => {
-        console.log('DOM carregado, inicializando LeagueSystem...');
         window.leagueSystem = new LeagueSystem();
-        console.log('LeagueSystem criado:', window.leagueSystem);
     });
 
 
