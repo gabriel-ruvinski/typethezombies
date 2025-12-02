@@ -239,7 +239,7 @@
 
             setTimeout(() => {
                this.salvarPontuacao().then(() => {
-                alert('Fim de jogo! \nPontuação: ${this.pontuacao}');
+                alert(`Fim de jogo! \nPontuação: ${this.pontuacao}`);
                 this.voltarMenu();
                })
             }, 500);
