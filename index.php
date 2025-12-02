@@ -3,16 +3,16 @@ require "php/authenticate.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Type the Zombies</title>
     <link rel="stylesheet" href="styles/styles.css">
 </head>
-
 <body>
-    <?php if ($login): ?>
+
+    <!-- TELA PRINCIPAL -->
+    <?php if ($login): ?> <!-- VERIFICA SE ESTÁ LOGADO -->
         <div class="tela tela-inicial">
             <h1>Type the Zombies</h1>
             <div class="menu">
@@ -26,7 +26,6 @@ require "php/authenticate.php";
             </div>
             <p class="rodape">© 2025 Todos os direitos reservados.</p>
         </div>
-
     <?php else: ?>
         <div class="tela tela-auth">
             <div class="auth-header">
@@ -46,19 +45,17 @@ require "php/authenticate.php";
         </div>
     <?php endif; ?>
 
+    <!-- TELA DE CONFIGS -->
     <div class="tela tela-config" style="display: none;">
         <h2>Configurações</h2>
-
         <div class="config-opcao">
             <label for="musica">Volume da música</label>
             <input type="range" id="musica" min="0" max="100" value="70">
         </div>
-
         <div class="config-opcao">
             <label for="efeitos">Volume dos efeitos</label>
             <input type="range" id="efeitos" min="0" max="100" value="80">
         </div>
-
         <div class="config-opcao">
             <label for="dificuldade">Dificuldade</label>
             <select id="dificuldade">
@@ -67,7 +64,6 @@ require "php/authenticate.php";
                 <option value="dificil">Difícil</option>
             </select>
         </div>
-
         <div class="config-opcao">
             <label for="tema">Tema</label>
             <select id="tema">
@@ -76,31 +72,29 @@ require "php/authenticate.php";
                 <option value="vermelho">Vermelho</option>
             </select>
         </div>
-
         <div class="config-botoes">
             <button id="btnSalvar">Salvar</button>
             <button id="btnVoltar">Voltar</button>
         </div>
     </div>
 
+    <!-- A TELA DO JOGO -->
     <div class="tela tela-jogo" style="display: none;">
         <div class="game-header">
             <div class="score">Pontuação: <span id="pontuacao">0</span></div>
             <div class="lives">Vidas: <span id="vidas">3</span></div>
             <div class="timer">Tempo: <span id="tempo">60</span>s</div>
         </div>
-
         <div class="game-area" id="gameArea">
         </div>
-
         <div class="input-area">
             <input type="text" id="inputPalavra" placeholder="Digite a palavra...">
             <div class="palavra-atual" id="palavraAtual"></div>
         </div>
-
         <button class="botao" id="btnVoltarJogo">Voltar ao Menu</button>
     </div>
 
+    <!-- TELA DE HISTÓRICO -->
     <div class="tela tela-historico" style="display: none;">
         <h2>Histórico de Partidas</h2>
         <table id="tabelaHistorico">
@@ -117,6 +111,12 @@ require "php/authenticate.php";
         </table>
         <button id="btnVoltarHistorico">Voltar</button>
     </div>
+
+    <!--
+    ================
+    SUBTELAS DA LIGA
+    ================
+    -->
 
     <!-- TELA PRINCIPAL DAS LIGAS -->
     <div class="tela tela-ligas" style="display: none;">
@@ -184,6 +184,8 @@ require "php/authenticate.php";
         </div>
     </div>
 
+
+    <!-- MENU RANKINGS -->
     <div class="tela tela-ranking" style="display: none;">
         <div class="container-config">
             <h2>Sistema de Rankings</h2>
@@ -192,12 +194,10 @@ require "php/authenticate.php";
                     Ranking Geral
                     <small>Todas as pontuações desde o início</small>
                 </button>
-
                 <button class="botao ranking-opcao" id="btnRankingSemanal">
                     Ranking Semanal
                     <small>Pontuações desta semana</small>
                 </button>
-
                 <button class="botao botao-voltar" id="btnVoltarRanking">Voltar</button>
             </div>
         </div>
