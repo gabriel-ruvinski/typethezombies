@@ -61,10 +61,14 @@ function getRankingSemanal($conn) {
     }
     
     echo json_encode([
-        'success' => true,
-        'ranking' => $ranking,
-        'periodo' => "Semana: " . date('d/m', strtotime($segunda)) . " a " . date('d/m', strtotime($domingo))
-    ]);
+    'success' => true,
+    'ranking' => $ranking,
+    'periodo' => [
+        'texto' => "Semana: " . date('d/m', strtotime($segunda)) . " a " . date('d/m', strtotime($domingo)),
+        'inicio' => date('d/m', strtotime($segunda)),
+        'fim' => date('d/m', strtotime($domingo))
+    ]
+]);
 }
 
 $conn = connect_db();

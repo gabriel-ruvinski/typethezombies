@@ -41,6 +41,10 @@ ob_end_clean();
 echo json_encode([
     'success' => true,
     'ranking' => $ranking,
-    'periodo' => "Semana: " . date('d/m', strtotime($segunda)) . " a " . date('d/m', strtotime($domingo))
+    'periodo' => [
+        'texto' => "Semana: " . date('d/m', strtotime($segunda)) . " a " . date('d/m', strtotime($domingo)),
+        'inicio' => date('d/m', strtotime($segunda)),
+        'fim' => date('d/m', strtotime($domingo))
+    ]
 ]);
 ?>
