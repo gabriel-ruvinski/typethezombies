@@ -135,7 +135,7 @@ require "php/authenticate.php";
     <!-- TELA CRIAR LIGA -->
     <div class="tela tela-criar-liga" style="display: none;">
         <h2>Criar Nova Liga</h2>
-        <form id="formCriarLiga" class="form-liga">
+        <form id="formCriarLiga" class="form-login">
             <div class="form-group">
                 <label for="ligaNome">Nome da Liga:</label>
                 <input type="text" id="ligaNome" required placeholder="Digite o nome da liga">
@@ -154,7 +154,7 @@ require "php/authenticate.php";
     <!-- TELA ENTRAR LIGA -->
     <div class="tela tela-entrar-liga" style="display: none;">
         <h2>Entrar em Liga</h2>
-        <form id="formEntrarLiga" class="form-liga">
+        <form id="formEntrarLiga" class="form-login">
             <div class="form-group">
                 <label for="ligaID">ID da Liga:</label>
                 <input type="text" id="ligaID" required placeholder="Digite o ID da liga">

@@ -410,15 +410,10 @@ body {
 }
 
 /* === TELA DE LOGIN === */
-.tela-login, .tela-criar-liga, .tela-entrar-liga {
+.tela-login {
   text-align: center;
   padding: 40px 30px;
   max-width: 400px;
-  margin: 0 auto;
-}
-
-.form-login, .form-liga {
-  max-width: 350px;
   margin: 0 auto;
 }
 
@@ -742,7 +737,7 @@ body {
 }
 
 /* Formulários de liga - Padronizados com outros forms */
-.form-liga .form-group {
+.form-liga {
     margin-bottom: 20px;
     text-align: left;
 }
@@ -943,3 +938,34 @@ body {
 .posicao-1 .posicao-badge { background: gold; color: black; }
 .posicao-2 .posicao-badge { background: silver; color: black; }
 .posicao-3 .posicao-badge { background: #CD7F32; color: white; }
+
+/* Classe utilitária para telas de formulário */
+.tela-formulario {
+    text-align: center;
+    padding: 40px 30px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.tela-formulario h2 {
+    color: var(--cor-texto);
+    margin-bottom: 30px;
+    font-size: 1.8em;
+}
+
+/* Aplique a classe nas telas */
+.tela-criar-liga,
+.tela-entrar-liga {
+    text-align: center;
+    padding: 40px 30px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Garanta que os formulários tenham mesma largura */
+.form-login,
+#formCriarLiga,
+#formEntrarLiga {
+    max-width: 350px;
+    margin: 0 auto;
+}
