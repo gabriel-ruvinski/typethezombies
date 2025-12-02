@@ -23,7 +23,33 @@
             this.inicializarEventos();
             this.carregarDadosIniciais();
 
+
             console.log('LeagueSystem inicializado com sucesso');
+        }
+
+        async definirLigaAtiva(ligaId) {
+            console.log('Definindo liga ativa:', ligaId);
+
+            try {
+                const formData = new FormData();
+                formData.append('liga_id', ligaId);
+
+                const response = await fetch('php/set_active_league.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    this.mostrarMensagem('✅ Liga selecionada! Suas próximas partidas contarão aqui.', 'sucesso');
+                } else {
+                    this.mostrarMensagem('❌ ' + data.message, 'erro');
+                }
+            } catch (error) {
+                console.error('Erro ao definir liga ativa:', error);
+                this.mostrarMensagem('❌ Erro de conexão', 'erro');
+            }
         }
 
         elementosExistem() {
@@ -244,10 +270,11 @@
 
         // Renderização
         renderizarMinhasLigas() {
-            if (!this.listaMinhasLigas) return;
+            const container = document.getElementById('listaMinhasLigas');
+            if (!container) return;
 
             if (this.ligasUsuario.length === 0) {
-                this.listaMinhasLigas.innerHTML = `
+                container.innerHTML = `
             <div class="liga-vazia">
                 <p>Você não está em nenhuma liga ainda.</p>
                 <p>Crie uma nova liga ou entre em uma existente!</p>
@@ -262,14 +289,22 @@
             <p><strong>Criador:</strong> ${liga.criador}</p>
             <p><strong>Membros:</strong> ${liga.membros}</p>
             <p><strong>ID da Liga:</strong> ${liga.id}</p>
+            
             <div class="liga-card-botoes">
-                <button onclick="leagueSystem.verLiga(${liga.id})" class="botao-ver-liga">Ver Detalhes</button>
-                <button onclick="leagueSystem.carregarRankingLiga(${liga.id})" class="botao-ranking-liga">Ver Ranking</button>
+                <button onclick="window.leagueSystem.definirLigaAtiva(${liga.id})" 
+                        class="botao-ver-liga">
+                    🎯 Jogar Nesta Liga
+                </button>
+                
+                <button onclick="window.leagueSystem.verLiga(${liga.id})" 
+                        class="botao-ranking-liga">
+                    📊 Ver Ranking
+                </button>
             </div>
         </div>
     `).join('');
 
-            this.listaMinhasLigas.innerHTML = html;
+            container.innerHTML = html;
         }
 
         renderizarRankingGeral() {
@@ -405,5 +440,6 @@
         window.leagueSystem = new LeagueSystem();
         console.log('LeagueSystem criado:', window.leagueSystem);
     });
+
 
 })();

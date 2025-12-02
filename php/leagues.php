@@ -118,6 +118,8 @@ function criarLiga($conn, $user_id) {
         $sql = "INSERT INTO users_leagues (user_id, league_id) 
                 VALUES ($user_id, $liga_id)";
         mysqli_query($conn, $sql);
+
+        $_SESSION['liga_ativa'] = $liga_id;
         
         echo json_encode([
             'success' => true, 
@@ -166,6 +168,7 @@ function entrarLiga($conn, $user_id) {
             VALUES ($user_id, $liga_id)";
     
     if (mysqli_query($conn, $sql)) {
+        $_SESSION['liga_ativa'] = $liga_id;
         echo json_encode([
             'success' => true, 
             'message' => 'Entrou na liga com sucesso!'
