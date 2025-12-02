@@ -212,12 +212,7 @@
         async verLiga(ligaId) {
             try {
                 const data = await this.apiRequest('get_liga_info', { liga_id: ligaId });
-
                 if (data.success) {
-                    // Mostrar informações da liga em um modal ou página
-                    alert(`Liga: ${data.liga.league_name}\nCriador: ${data.liga.criador_nome}\nMembros: ${data.liga.total_membros}`);
-
-                    // Opcional: carregar ranking desta liga
                     this.carregarRankingLiga(ligaId);
                 }
             } catch (error) {
@@ -391,6 +386,4 @@
     document.addEventListener('DOMContentLoaded', () => {
         window.leagueSystem = new LeagueSystem();
     });
-
-
 })();
