@@ -1,8 +1,6 @@
 <?php
-// leagues.php - VERSÃO CORRIGIDA
 error_reporting(E_ERROR | E_PARSE); // Só mostra erros críticos, não warnings
 
-// Iniciar sessão uma única vez
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -13,7 +11,7 @@ ob_start();
 
 require "db_functions.php";
 
-// Verificar login diretamente (sem require authenticate.php)
+// Verificar login diretamente
 $login = false;
 $user_id = 0;
 if (isset($_SESSION["user_id"]) && isset($_SESSION["user_name"]) && isset($_SESSION["user_email"])) {
@@ -353,6 +351,8 @@ function getLigaInfo($conn) {
     
     echo json_encode(['success' => true, 'liga' => $liga]);
 }
+
+// NOTA: FUNÇÕES AINDA NÃO IMPLEMENTADAS
 
 /**
  * Sair de uma liga

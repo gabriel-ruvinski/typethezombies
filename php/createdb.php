@@ -18,21 +18,23 @@ $sql = "CREATE DATABASE IF NOT EXISTS $dbname
             COLLATE utf8mb4_unicode_ci";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Database '$dbname' criado com sucesso<br>";
+    echo "Database '$dbname' criado com sucesso<br>";
 } else {
-    echo "❌ Erro criando database: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando database: " . mysqli_error($conn) . "<br>";
 }
 
 // Selecionar banco
 $sql = "USE $dbname";
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Database selecionado com sucesso<br>";
+    echo "Database selecionado com sucesso<br>";
 } else {
-    echo "❌ Erro selecionando database: " . mysqli_error($conn) . "<br>";
+    echo "Erro selecionando database: " . mysqli_error($conn) . "<br>";
 }
 
 echo "<hr>";
 echo "<h3>CRIANDO TABELAS:</h3>";
+
+// NOTA: TABELAS CONTÉM INFORMAÇÕES EXTRAS AINDA NÃO UTILIZADAS, PARA CASO A GENTE FOR FAZER ALGO NO FUTURO
 
 // ============================================
 // 1. TABELA: USUÁRIOS
@@ -50,9 +52,9 @@ $sql = "CREATE TABLE IF NOT EXISTS users (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Tabela 'users' criada com sucesso<br>";
+    echo "Tabela 'users' criada com sucesso<br>";
 } else {
-    echo "❌ Erro criando tabela users: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando tabela users: " . mysqli_error($conn) . "<br>";
 }
 
 // ============================================
@@ -73,13 +75,13 @@ $sql = "CREATE TABLE IF NOT EXISTS leagues (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Tabela 'leagues' criada com sucesso<br>";
+    echo "Tabela 'leagues' criada com sucesso<br>";
 } else {
-    echo "❌ Erro criando tabela leagues: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando tabela leagues: " . mysqli_error($conn) . "<br>";
 }
 
 // ============================================
-// 3. TABELA: USUÁRIOS_LIGAS (Relação M:N)
+// 3. TABELA: USUÁRIOS_LIGAS
 // ============================================
 $sql = "CREATE TABLE IF NOT EXISTS users_leagues (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -96,9 +98,9 @@ $sql = "CREATE TABLE IF NOT EXISTS users_leagues (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Tabela 'users_leagues' criada com sucesso<br>";
+    echo "Tabela 'users_leagues' criada com sucesso<br>";
 } else {
-    echo "❌ Erro criando tabela users_leagues: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando tabela users_leagues: " . mysqli_error($conn) . "<br>";
 }
 
 // ============================================
@@ -122,9 +124,9 @@ $sql = "CREATE TABLE IF NOT EXISTS matches (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Tabela 'matches' criada com sucesso<br>";
+    echo "Tabela 'matches' criada com sucesso<br>";
 } else {
-    echo "❌ Erro criando tabela matches: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando tabela matches: " . mysqli_error($conn) . "<br>";
 }
 
 // ============================================
@@ -147,9 +149,9 @@ $sql = "CREATE TABLE IF NOT EXISTS league_scores (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Tabela 'league_scores' criada com sucesso<br>";
+    echo "Tabela 'league_scores' criada com sucesso<br>";
 } else {
-    echo "❌ Erro criando tabela league_scores: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando tabela league_scores: " . mysqli_error($conn) . "<br>";
 }
 
 // ============================================
@@ -172,9 +174,9 @@ $sql = "CREATE TABLE IF NOT EXISTS league_invites (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Tabela 'league_invites' criada com sucesso<br>";
+    echo "Tabela 'league_invites' criada com sucesso<br>";
 } else {
-    echo "❌ Erro criando tabela league_invites: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando tabela league_invites: " . mysqli_error($conn) . "<br>";
 }
 
 // ============================================
@@ -195,9 +197,9 @@ $sql = "CREATE TABLE IF NOT EXISTS league_activities (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Tabela 'league_activities' criada com sucesso<br>";
+    echo "Tabela 'league_activities' criada com sucesso<br>";
 } else {
-    echo "❌ Erro criando tabela league_activities: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando tabela league_activities: " . mysqli_error($conn) . "<br>";
 }
 
 echo "<hr>";
@@ -226,9 +228,9 @@ $sql = "CREATE PROCEDURE update_user_total_points(IN user_id_param INT)
     END";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Procedure 'update_user_total_points' criada com sucesso<br>";
+    echo "Procedure 'update_user_total_points' criada com sucesso<br>";
 } else {
-    echo "⚠️ Erro criando procedure: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando procedure: " . mysqli_error($conn) . "<br>";
 }
 
 // ============================================
@@ -241,11 +243,8 @@ $sql = "CREATE TRIGGER after_match_insert
     AFTER INSERT ON matches
     FOR EACH ROW
     BEGIN
-        -- Atualizar pontuação total do usuário
         CALL update_user_total_points(NEW.user_id);
-        
-        -- Atualizar pontuação na liga se houver
-        IF NEW.league_id IS NOT NULL THEN
+            IF NEW.league_id IS NOT NULL THEN
             INSERT INTO league_scores (user_id, league_id, total_points, matches_played, last_played)
             VALUES (NEW.user_id, NEW.league_id, NEW.points, 1, NEW.match_date)
             ON DUPLICATE KEY UPDATE
@@ -255,7 +254,6 @@ $sql = "CREATE TRIGGER after_match_insert
                 last_played = NEW.match_date,
                 last_updated = CURRENT_TIMESTAMP;
                 
-            -- Registrar atividade na liga
             INSERT INTO league_activities (league_id, user_id, activity_type, activity_description, points_change)
             VALUES (NEW.league_id, NEW.user_id, 'match', 
                     CONCAT('Partida realizada: ', NEW.points, ' pontos'), 
@@ -264,9 +262,9 @@ $sql = "CREATE TRIGGER after_match_insert
     END";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Trigger 'after_match_insert' criado com sucesso<br>";
+    echo "Trigger 'after_match_insert' criado com sucesso<br>";
 } else {
-    echo "⚠️ Erro criando trigger: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando trigger: " . mysqli_error($conn) . "<br>";
 }
 
 // ============================================
@@ -279,15 +277,14 @@ $sql = "CREATE TRIGGER after_user_league_join
     AFTER INSERT ON users_leagues
     FOR EACH ROW
     BEGIN
-        -- Registrar atividade de entrada na liga
         INSERT INTO league_activities (league_id, user_id, activity_type, activity_description)
         VALUES (NEW.league_id, NEW.user_id, 'join', 'Usuário entrou na liga');
     END";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ Trigger 'after_user_league_join' criado com sucesso<br>";
+    echo "Trigger 'after_user_league_join' criado com sucesso<br>";
 } else {
-    echo "⚠️ Erro criando trigger: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando trigger: " . mysqli_error($conn) . "<br>";
 }
 
 // ============================================
@@ -308,9 +305,9 @@ $sql = "CREATE OR REPLACE VIEW view_ranking_geral AS
     ORDER BY total_points DESC, average_score DESC";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ View 'view_ranking_geral' criada com sucesso<br>";
+    echo "View 'view_ranking_geral' criada com sucesso<br>";
 } else {
-    echo "⚠️ Erro criando view: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando view: " . mysqli_error($conn) . "<br>";
 }
 
 // ============================================
@@ -334,15 +331,14 @@ $sql = "CREATE OR REPLACE VIEW view_ranking_liga AS
     ORDER BY l.id, ls.total_points DESC";
 
 if (mysqli_query($conn, $sql)) {
-    echo "✅ View 'view_ranking_liga' criada com sucesso<br>";
+    echo "View 'view_ranking_liga' criada com sucesso<br>";
 } else {
-    echo "⚠️ Erro criando view: " . mysqli_error($conn) . "<br>";
+    echo "Erro criando view: " . mysqli_error($conn) . "<br>";
 }
 
 echo "<hr>";
 echo "<h3>DADOS DE EXEMPLO (OPCIONAL):</h3>";
 
-// Inserir dados de exemplo (opcional - remova se não quiser)
 $insertSampleData = false; // Mude para true se quiser dados de exemplo
 
 if ($insertSampleData) {
@@ -367,31 +363,10 @@ if ($insertSampleData) {
         mysqli_query($conn, $sql);
     }
 
-    echo "✅ Dados de exemplo inseridos<br>";
+    echo "Dados de exemplo inseridos<br>";
 }
-
-echo "<hr>";
-echo "<h3>RESUMO:</h3>";
-echo "Tabelas criadas:<br>";
-echo "1. users - Armazena informações dos usuários<br>";
-echo "2. leagues - Armazenas as ligas<br>";
-echo "3. users_leagues - Relacionamento usuários-ligas<br>";
-echo "4. matches - Histórico de partidas<br>";
-echo "5. league_scores - Pontuações nas ligas<br>";
-echo "6. league_invites - Convites para ligas<br>";
-echo "7. league_activities - Atividades nas ligas<br><br>";
-
-echo "Views criadas:<br>";
-echo "1. view_ranking_geral - Ranking geral de jogadores<br>";
-echo "2. view_ranking_liga - Ranking por liga<br><br>";
-
-echo "Procedures/Triggers:<br>";
-echo "1. update_user_total_points - Atualiza pontuação total<br>";
-echo "2. after_match_insert - Trigger após partida<br>";
-echo "3. after_user_league_join - Trigger após entrar na liga<br>";
 
 mysqli_close($conn);
 
 echo "<hr>";
-echo "<h3 style='color: green;'>✅ BANCO DE DADOS CONFIGURADO COM SUCESSO!</h3>";
-echo "<p>Agora você pode usar todas as funcionalidades do sistema de ligas.</p>";
+echo "<h3 style='color: green;'>BANCO DE DADOS CONFIGURADO COM SUCESSO!</h3>";

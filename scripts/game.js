@@ -189,7 +189,7 @@
 
             if (!palavrasPool || palavrasPool.length === 0) {
                 console.error('Palavras pool vazio para dificuldade:', this.dificuldade);
-                palavrasPool = ['zumbi']; // Fallback
+                palavrasPool = ['erro']; // Fallback
             }
             const palavra = palavrasPool[Math.floor(Math.random() * palavrasPool.length)];
             const zumbi = document.createElement('div');

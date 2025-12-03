@@ -1,5 +1,4 @@
 <?php
-// set_active_league.php
 session_start();
 
 header('Content-Type: application/json');

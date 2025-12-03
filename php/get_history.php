@@ -1,12 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-
-// Configuração do banco (use suas credenciais)
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "typezombies";
+require('credentials.php');
 
 // Verificar login
 if (!isset($_SESSION["user_id"])) {

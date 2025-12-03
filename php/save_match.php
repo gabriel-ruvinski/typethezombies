@@ -1,17 +1,11 @@
 <?php
-// save_match.php - ARQUIVO ÚNICO COMPLETO
-error_reporting(0); // Desativa erros para não quebrar o JSON
-ob_start(); // Controla saída
+error_reporting(0); 
+ob_start();
+require('credentials.php');
 
 session_start();
 
-// 1. CONFIGURAÇÃO DO BANCO (copie do credentials.php)
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "typezombies";
-
-// 2. CONEXÃO COM BANCO
+// CONEXÃO COM BANCO
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
     ob_end_clean();
@@ -19,7 +13,7 @@ if (!$conn) {
     exit();
 }
 
-// 3. VERIFICAR SE ESTÁ LOGADO
+// VERIFICAR SE ESTÁ LOGADO
 if (!isset($_SESSION["user_id"])) {
     mysqli_close($conn);
     ob_end_clean();
@@ -32,10 +26,10 @@ $pontuacao = intval($_POST['pontuacao'] ?? 0);
 $duracao = intval($_POST['duracao'] ?? 60); // Valor padrão 60 segundos
 $liga_id = isset($_SESSION['liga_ativa']) ? intval($_SESSION['liga_ativa']) : null;
 
-// 4. VERIFICAR LIGA ATIVA (da sessão)
+// VERIFICAR LIGA ATIVA
 $liga_id = isset($_SESSION['liga_ativa']) ? intval($_SESSION['liga_ativa']) : null;
 
-// 5. SALVAR PARTIDA NA TABELA matches
+// SALVAR PARTIDA NA TABELA matches
 $sql_matches = "INSERT INTO matches (user_id, points, match_time, league_id) 
                 VALUES ($user_id, $pontuacao, $duracao, " . ($liga_id ?: 'NULL') . ")";
 
@@ -49,7 +43,7 @@ if (!mysqli_query($conn, $sql_matches)) {
     exit();
 }
 
-// 6. SE TEM LIGA ATIVA, ATUALIZAR LEAGUE_SCORES
+// SE TEM LIGA ATIVA, ATUALIZAR LEAGUE_SCORES
 if ($liga_id) {
     // Verificar se usuário pertence à liga
     $check_liga = "SELECT id FROM users_leagues 
@@ -71,14 +65,14 @@ if ($liga_id) {
     }
 }
 
-// 7. ATUALIZAR PONTUAÇÃO TOTAL DO USUÁRIO
+// ATUALIZAR PONTUAÇÃO TOTAL DO USUÁRIO
 $sql_update_user = "UPDATE users 
                     SET total_points = total_points + $pontuacao,
                         total_matches = total_matches + 1
                     WHERE id = $user_id";
 mysqli_query($conn, $sql_update_user);
 
-// 8. RESPOSTA DE SUCESSO
+// RESPOSTA DE SUCESSO
 mysqli_close($conn);
 ob_end_clean();
 header('Content-Type: application/json');

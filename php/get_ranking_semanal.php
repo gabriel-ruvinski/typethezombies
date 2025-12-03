@@ -1,5 +1,4 @@
 <?php
-// get_ranking_semanal.php - ARQUIVO SIMPLES
 error_reporting(0);
 ob_start();
 
@@ -12,7 +11,7 @@ $conn = connect_db();
 $segunda = date('Y-m-d', strtotime('monday this week'));
 $domingo = date('Y-m-d', strtotime('sunday this week'));
 
-// Consulta SIMPLES para ranking semanal
+// Consulta para ranking semanal
 $sql = "SELECT 
             u.username as nome,
             SUM(m.points) as pontuacao,

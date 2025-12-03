@@ -210,7 +210,7 @@ function atualizarTabelaHistorico(historico) {
         tbody.innerHTML = `
             <tr>
                 <td colspan="3" style="text-align: center; padding: 20px;">
-                    📭 Nenhuma partida registrada ainda.
+                    Nenhuma partida registrada ainda.
                 </td>
             </tr>
         `;
