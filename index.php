@@ -81,20 +81,20 @@ require "php/authenticate.php";
     <!-- A TELA DO JOGO -->
     <div class="tela tela-jogo" style="display: none;">
         <div class="game-header">
-            <div class="dificuldade-indicator" id="dificuldadeIndicator">
-                <!-- Será preenchido via JavaScript -->
-            </div>
             <div class="score">Pontuação: <span id="pontuacao">0</span></div>
             <div class="lives">Vidas: <span id="vidas">3</span></div>
             <div class="timer">Tempo: <span id="tempo">60</span>s</div>
+            <div class="dificuldade-indicator" id="dificuldadeIndicator">
+                <span id="dificuldade">.</span>
+            </div>
         </div>
         <div class="game-area" id="gameArea">
         </div>
         <div class="input-area">
             <input type="text" id="inputPalavra" placeholder="Digite a palavra...">
             <div class="palavra-atual" id="palavraAtual"></div>
+            <button class="botao" id="btnVoltarJogo">Sair</button>
         </div>
-        <button class="botao" id="btnVoltarJogo">Voltar ao Menu</button>
     </div>
 
     <!-- TELA DE HISTÓRICO -->
