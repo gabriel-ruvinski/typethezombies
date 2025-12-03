@@ -350,6 +350,7 @@
             try {
                 const formData = new FormData();
                 formData.append('pontuacao', this.pontuacao);
+                formData.append('duracao', 60 - this.tempo); 
                 const response = await fetch('php/save_match.php', {
                     method: 'POST',
                     body: formData

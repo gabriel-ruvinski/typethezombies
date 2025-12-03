@@ -184,3 +184,54 @@ document.addEventListener('click', function (e) {
         mostrarTela('ranking');
     }
 });
+
+async function carregarHistorico() {
+    try {
+        const response = await fetch('php/get_history.php');
+        const data = await response.json();
+        
+        if (data.success) {
+            atualizarTabelaHistorico(data.historico);
+        } else {
+            console.error('Erro histórico:', data.message);
+        }
+    } catch (error) {
+        console.error('Erro ao carregar histórico:', error);
+    }
+}
+
+function atualizarTabelaHistorico(historico) {
+    const tbody = document.querySelector('#tabelaHistorico tbody');
+    if (!tbody) return;
+    
+    tbody.innerHTML = '';
+    
+    if (historico.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="3" style="text-align: center; padding: 20px;">
+                    📭 Nenhuma partida registrada ainda.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+    
+    historico.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.data}</td>
+            <td>${item.pontuacao}</td>
+            <td>${item.duracao}</td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// INTEGRAÇÃO - Carregar histórico quando abrir a tela
+document.addEventListener('click', function(e) {
+    if (e.target.id === 'btnHistorico') {
+        // Pequeno delay para garantir que a tela está visível
+        setTimeout(() => carregarHistorico(), 50);
+    }
+});
