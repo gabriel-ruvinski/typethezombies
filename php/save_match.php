@@ -29,13 +29,15 @@ if (!isset($_SESSION["user_id"])) {
 
 $user_id = $_SESSION["user_id"];
 $pontuacao = intval($_POST['pontuacao'] ?? 0);
+$duracao = intval($_POST['duracao'] ?? 60); // Valor padrão 60 segundos
+$liga_id = isset($_SESSION['liga_ativa']) ? intval($_SESSION['liga_ativa']) : null;
 
 // 4. VERIFICAR LIGA ATIVA (da sessão)
 $liga_id = isset($_SESSION['liga_ativa']) ? intval($_SESSION['liga_ativa']) : null;
 
 // 5. SALVAR PARTIDA NA TABELA matches
-$sql_matches = "INSERT INTO matches (user_id, points, league_id) 
-                VALUES ($user_id, $pontuacao, " . ($liga_id ?: 'NULL') . ")";
+$sql_matches = "INSERT INTO matches (user_id, points, match_time, league_id) 
+                VALUES ($user_id, $pontuacao, $duracao, " . ($liga_id ?: 'NULL') . ")";
 
 if (!mysqli_query($conn, $sql_matches)) {
     mysqli_close($conn);

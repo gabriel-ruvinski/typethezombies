@@ -245,6 +245,12 @@ body {
     margin: auto;
 }
 
+.tela-historico {
+    text-align: center;
+    padding: 20px;
+    max-width: 400px;
+}
+
 .tela-jogo {
     width: 800px;
     height: 600px;
@@ -321,6 +327,7 @@ body {
 /* 5.4 Botões específicos de autenticação */
 #btnEntrarLogin,
 #btnVoltarLogin,
+#btnVoltarHistorico,
 #btnCriarConta,
 #btnVoltarRegistro,
 #btnVoltarStats {
@@ -337,6 +344,7 @@ body {
 
 #btnEntrarLogin:hover,
 #btnVoltarLogin:hover,
+#btnVoltarHistorico:hover,
 #btnCriarConta:hover,
 #btnVoltarRegistro:hover,
 #btnVoltarStats:hover {
