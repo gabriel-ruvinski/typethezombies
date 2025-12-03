@@ -50,8 +50,7 @@
 
 ## Estrutura do Projeto
 
-(estrutura)
-
+[estrutura]
 
 ## Instalação e Configuração
 
@@ -88,21 +87,15 @@
 ### Criar uma Liga
 
     Acesse "Ligas" no menu principal
-
     Clique em "Criar Liga"
-
     Defina nome e senha
-
-    Convite amigos com o ID gerado
+    Convite pessoas com o ID gerado
 
 ### Entrar em uma Liga
 
     Acesse "Ligas"
-
     Clique em "Entrar em Liga"
-
     Insira o ID e senha
-
     Comece a competir
 
 ## Configurações
@@ -113,8 +106,3 @@ etc etc etc
 ## Autores
 
 nomes
-
-<div align="center">
-
-https://img.shields.io/badge/JOGAR%2520AGORA-00FF66?style=for-the-badge&logo=game&logoColor=black
-</div> ```
