@@ -104,4 +104,3 @@ Type the Zombies é um jogo de digitação competitivo onde sua habilidade de di
 - [ ] Luigi Favaro
 - [ ] André
 - [ ] Emanuel
-nomes
