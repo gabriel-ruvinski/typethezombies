@@ -101,8 +101,13 @@ Type the Zombies é um jogo de digitação competitivo onde sua habilidade de di
 ## Configurações
 ### Ajustes Disponíveis
 
-etc etc etc
-
+- [ ] 3 temas
+- [ ] 3 dificuldades
+      
 ## Autores
 
+- [ ] Gabriel Henrique Ruvinski
+- [ ] Luigi Favaro
+- [ ] André
+- [ ] Emanuel
 nomes
