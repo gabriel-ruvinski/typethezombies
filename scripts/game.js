@@ -62,8 +62,8 @@
                     this.intervaloGeracao = 2000;
                     break;
                 case 'dificil':
-                    this.velocidadeZumbi = 0.8;
-                    this.intervaloGeracao = 1500;
+                    this.velocidadeZumbi = 0.75;
+                    this.intervaloGeracao = 1800;
                     break;
             }
             console.log(`Dificuldade: ${this.dificuldade}, Velocidade: ${this.velocidadeZumbi}, Intervalo: ${this.intervaloGeracao}`);

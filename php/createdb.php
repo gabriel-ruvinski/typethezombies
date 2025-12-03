@@ -337,7 +337,7 @@ if (mysqli_query($conn, $sql)) {
 }
 
 echo "<hr>";
-echo "<h3>DADOS DE EXEMPLO (OPCIONAL):</h3>";
+echo "<h3>DADOS DE EXEMPLO:</h3>";
 
 $insertSampleData = false; // Mude para true se quiser dados de exemplo
 
