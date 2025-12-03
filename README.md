@@ -48,10 +48,6 @@ Type the Zombies é um jogo de digitação competitivo onde sua habilidade de di
 ### **Ferramentas**
 - ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
-## Estrutura do Projeto
-
-[estrutura]
-
 ## Instalação e Configuração
 
 ### **Pré-requisitos**
