@@ -1,6 +1,5 @@
 # Type the Zombies
 
-[![Status do Projeto](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)]()
 [![Licença](https://img.shields.io/badge/license-MIT-blue)]()
 [![Versão](https://img.shields.io/badge/version-1.0.0-green)]()
 
@@ -13,21 +12,20 @@ Type the Zombies é um jogo de digitação competitivo onde sua habilidade de di
 ### **Sistema de Jogo**
 - [ ] Digitação contra zumbis
 - [ ] Sistema de pontuação
-- [ ] Múltiplas dificuldades
+- [ ] Diferentes dificuldades
 - [ ] Temporizador
 - [ ] Sistema de vidas
 
 ### **Sistema de Usuário**
 - [ ] Registro e login
-- [ ] Autenticação segura
-- [ ] Perfil do jogador
+- [ ] Autenticação
 - [ ] Histórico de partidas
 
-### **Sistema de Competição**
+### **Sistema de Ligas**
 - [ ] Ligas privadas
 - [ ] Rankings
 - [ ] Pontuação por liga
-- [ ] Sistema de convites
+- [ ] Sistema de entrada em ligas
 
 ### **Personalização**
 - [ ] Temas visuais
