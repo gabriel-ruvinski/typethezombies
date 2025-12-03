@@ -17,12 +17,11 @@ O uso de IA foi permitido para as seguintes finalidades:
 
 ## Registro de Interações
 
-1) **Data:** 20/11/2025
+### Interação 1
 
+**Data:** 20/11/2025
 **Etapa do Projeto:** Estruturação dos arquivos do trabalho
-
 **Ferramenta de IA Utilizada:** ChatGPT
-
 **Objetivo da Consulta:** Procurar a melhor estrutura para o trabalho, com todos os scripts necessários
 
 **Prompt(s) Utilizado(s):** Para a construção de um jogo de digitação, com um sistema inicial de login com vários usuários, que podem acessar seu histórico, participar de ligas e podem ser rankeados, qual estrutura de arquivos poderia ser interessante?
@@ -50,13 +49,11 @@ phps de ranking -> acesso aos rankings
 
 **Referência no Código:** As ideias trazidas pela IA foram implementadas no trabalho como um todo, representadas na estrutura do mesmo. A referência dessa interação está neste mesmo arquivo.
 
+### Interação 2
 
-2) **Data:** 22/11/2025
-   
+**Data:** 22/11/2025
 **Etapa do Projeto:** Criação do banco de dados
-
 **Ferramenta de IA Utilizada:** ChatGPT
-
 **Objetivo da Consulta:** Revisão no banco de dados e conferir se as tabelas estão com falhas.
 
 **Prompt(s) Utilizado(s):** Foi explicado à IA quais eram os atributos que cada tabela criada pela equipe tinha e perguntado se seria necessário mais algum atributo (inicialmente, foram citadas as tabelas iniciais do projeto -> users, matches, users_leagues).
@@ -70,12 +67,11 @@ leagues (linha 70);
 users_leagues (linhas 92 e 93);
 matches (linhas 117 e 118);
 
-3) **Data:** 26/11/2025
-   
+### Interação 3
+
+**Data:** 26/11/2025
 **Etapa do projeto:** Animação do jogo
-
 **Ferramenta de IA Utilizada**: ChatGPT
-
 **Objetivo da Consulta:** Buscar maneiras de sistematizar nosso jogo de forma com que, quando o usuário clica em um botão, a tela é ocultada e outra aparece, de forma com que o jogo todo funcione em uma só aba.
 
 **Prompt(s) Utilizado(s):** O sistema de telas que o grupo pensou para o trabalho foi um que funciona da seguinte maneira: enquanto uma tela aparece, todas as outras estão ocultas, e as telas vão surgindo conforme as interações do usuário (exemplo: usuário clica no botão configurações da página inicial -> a caixa inicial "some" e aparece a caixa de configurações).
@@ -86,12 +82,11 @@ matches (linhas 117 e 118);
 
 **Referência no Código:** Toda a aplicação do sistema foi implementada no script main.js (linha 22 a 144). Essa parte do script contém o conjunto telas (descreve todas as telas), a função mostrarTela (troca as telas) e a animação de todos os botões e telas (página inicial, páginas secundárias, e botões de "Voltar")
 
-4) **Data:** 27/11/2025
-   
+### Interação 4
+
+**Data:** 27/11/2025
 **Etapa do projeto:** Estilização do jogo
-
 **Ferramenta de IA Utilizada:** ChatGPT
-
 **Objetivo da Consulta:** Buscar melhorias e revisar os estilos do jogo
 
 **Prompt(s) Utilizado(s):** Pensamos em estilizar os elementos dessa forma: (breve descrição dos botões e das telas, além de uma imagem da página inicial). 
@@ -104,12 +99,11 @@ matches (linhas 117 e 118);
 1)Melhorias: as melhorias solicitadas pela IA estão dispostas por todo o styles.css, alguns exemplos são a sombra padrão (linha 26), transition dos botões (linha 80), pequenos ajustes em witdh e padding (linhas 142 e 143, por exemplo).
 2)Diferentes temáticas (cores): a ideia de inserir temas diferentes foi implementada tanto no styles.css, no índice "1.TEMA E VARIÁVEIS" quanto no main.js, dentro da estrutura inicial do script "document.addEventListener('DOMContentLoaded', function ()", no comando switch case (linhas 13 a 16).
 
-5) **Data:** 30/11/2025
-    
+### Interação 5
+
+**Data:** 30/11/2025
 **Etapa do projeto:** Funcionamento do jogo
-
 **Ferramenta de IA Utilizada:** ChatGPT
-
 **Objetivo da Consulta:** Buscar uma otimização no sistema de carregamento de palavras
 
 **Prompt(s) Utilizado(s):** Atualmente, o sistema de palavras consiste em uma função básica de carregar palavras que estão em 3 vetores (por níveis de dificuldade). Além disso, em casos de erro, não aparecem palavras na tela. Existe alguma maneira de garantir maior otimização?
