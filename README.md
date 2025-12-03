@@ -6,7 +6,7 @@
 
 ## Sobre o Jogo
 
-[Descrição]
+Type the Zombies é um jogo de digitação competitivo onde sua habilidade de digitação é utilizada para matar uma horda de zumbis! Cada zumbi carrega uma palavra: digite-a corretamente para eliminá-lo antes que alcance o final da tela. Quanto mais rápido e preciso você for, maior será sua pontuação!
 
 ## Funcionalidades
 
