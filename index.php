@@ -81,6 +81,9 @@ require "php/authenticate.php";
     <!-- A TELA DO JOGO -->
     <div class="tela tela-jogo" style="display: none;">
         <div class="game-header">
+            <div class="dificuldade-indicator" id="dificuldadeIndicator">
+                <!-- Será preenchido via JavaScript -->
+            </div>
             <div class="score">Pontuação: <span id="pontuacao">0</span></div>
             <div class="lives">Vidas: <span id="vidas">3</span></div>
             <div class="timer">Tempo: <span id="tempo">60</span>s</div>

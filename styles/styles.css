@@ -970,3 +970,82 @@ body {
     max-width: 350px;
     margin: 0 auto;
 }
+
+/* === ESTILOS PARA ZUMBIS POR DIFICULDADE === */
+
+/* Zumbis Fácil - Verde claro */
+.zumbi-facil {
+    color: #66ff66;
+    border-color: #66ff66;
+    text-shadow: 0 0 8px rgba(102, 255, 102, 0.5);
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Zumbis Médio - Laranja/Amarelo */
+.zumbi-medio {
+    color: #ffcc00;
+    border-color: #ffcc00;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.9);
+    font-weight: bold;
+}
+
+/* Zumbis Difícil - Vermelho */
+.zumbi-dificil {
+    color: #ff3333;
+    border-color: #ff3333;
+    text-shadow: 0 0 12px rgba(255, 51, 51, 0.7);
+    background-color: rgba(0, 0, 0, 1);
+    font-weight: bold;
+    font-size: 1.2em;
+    border-width: 2px;
+}
+
+/* Animação especial para zumbis difíceis */
+.zumbi-dificil {
+    animation: pulse-dificil 2s infinite;
+}
+
+@keyframes pulse-dificil {
+    0% { box-shadow: 0 0 5px rgba(255, 51, 51, 0.5); }
+    50% { box-shadow: 0 0 15px rgba(255, 51, 51, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(255, 51, 51, 0.5); }
+}
+
+/* Badge indicador de dificuldade na tela do jogo */
+.dificuldade-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    z-index: 100;
+}
+
+.dificuldade-facil {
+    background-color: rgba(102, 255, 102, 0.2);
+    color: #66ff66;
+    border: 1px solid #66ff66;
+}
+
+.dificuldade-medio {
+    background-color: rgba(255, 204, 0, 0.2);
+    color: #ffcc00;
+    border: 1px solid #ffcc00;
+}
+
+.dificuldade-dificil {
+    background-color: rgba(255, 51, 51, 0.2);
+    color: #ff3333;
+    border: 1px solid #ff3333;
+    animation: pulse-badge 2s infinite;
+}
+
+@keyframes pulse-badge {
+    0% { box-shadow: 0 0 5px rgba(255, 51, 51, 0.3); }
+    50% { box-shadow: 0 0 10px rgba(255, 51, 51, 0.6); }
+    100% { box-shadow: 0 0 5px rgba(255, 51, 51, 0.3); }
+}

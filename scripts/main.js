@@ -9,14 +9,54 @@ document.addEventListener('DOMContentLoaded', function () {
             const dificuldade = document.getElementById("dificuldade").value;
             const tema = document.getElementById("tema").value;
 
+            // Salvar no localStorage
+            localStorage.setItem('dificuldade', dificuldade);
+            localStorage.setItem('tema', tema);
+
+            // Aplicar tema IMEDIATAMENTE
             document.body.classList.remove("tema-padrao", "tema-roxo", "tema-vermelho");
             switch (tema) {
                 case "roxo": document.body.classList.add("tema-roxo"); break;
                 case "vermelho": document.body.classList.add("tema-vermelho"); break;
                 default: document.body.classList.add("tema-padrao"); break;
             }
+
+            // ATUALIZAR DIFICULDADE NO JOGO
+            if (window.jogo && typeof window.jogo.recarregarDificuldade === 'function') {
+                const dificuldadeAplicada = window.jogo.recarregarDificuldade();
+                alert(`Configurações aplicadas!\nDificuldade: ${dificuldadeAplicada.toUpperCase()}`);
+            } else if (window.jogo) {
+                // Fallback para versão antiga
+                window.jogo.dificuldade = dificuldade;
+                window.jogo.configurarDificuldade();
+                window.jogo.atualizarPalavrasAtivas();
+                alert(`Configurações aplicadas!\nDificuldade: ${dificuldade.toUpperCase()}`);
+            } else {
+                alert(`Configurações salvas para a próxima partida!`);
+            }
         });
     }
+
+    function carregarConfiguracoes() {
+        const dificuldadeSalva = localStorage.getItem('dificuldade');
+        if (dificuldadeSalva && document.getElementById('dificuldade')) {
+            document.getElementById('dificuldade').value = dificuldadeSalva;
+        }
+
+        const temaSalvo = localStorage.getItem('tema') || 'padrao';
+        if (document.getElementById('tema')) {
+            document.getElementById('tema').value = temaSalvo;
+        }
+
+        document.body.classList.remove("tema-padrao", "tema-roxo", "tema-vermelho");
+        switch (temaSalvo) {
+            case "roxo": document.body.classList.add("tema-roxo"); break;
+            case "vermelho": document.body.classList.add("tema-vermelho"); break;
+            default: document.body.classList.add("tema-padrao"); break;
+        }
+    }
+
+    carregarConfiguracoes();
 });
 
 /* REFERENCIANDO AS TELAS */
@@ -56,11 +96,13 @@ document.addEventListener('click', function (e) {
     if (botao.id === 'btnHistorico') mostrarTela('historico');
     if (botao.id === 'btnLigas') mostrarTela('ligas');
     if (botao.id === 'btnJogar') {
-        // Inicia o jogo
-        if (typeof window.gameIniciar === 'function') {
-            window.gameIniciar();
+        // Usa a instância GLOBAL do jogo que já existe
+        if (window.jogo && typeof window.jogo.iniciarJogo === 'function') {
+            window.jogo.iniciarJogo();
         } else {
+            // Fallback se por algum motivo o jogo não foi criado
             mostrarTela('jogo');
+            console.error('Jogo não foi inicializado corretamente');
         }
     }
 
