@@ -29,8 +29,8 @@ Type the Zombies é um jogo de digitação competitivo onde sua habilidade de di
 
 ### **Personalização**
 - [ ] Temas visuais
-- [ ] Configurações de áudio
 - [ ] Ajustes de dificuldade
+- [ ] Configurações de áudio (Apenas o protótipo)
 
 ## Tecnologias Utilizadas
 
